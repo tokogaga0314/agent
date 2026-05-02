@@ -22,6 +22,7 @@
       --radius:24px;
     }
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     html,body{margin:0;padding:0;background:
       radial-gradient(circle at top left, rgba(239,68,68,.18), transparent 24%),
       radial-gradient(circle at 80% 0%, rgba(56,189,248,.16), transparent 22%),
@@ -57,7 +58,7 @@
     .legend-card .num{font-size:1.35rem;font-weight:900;letter-spacing:-.03em}
     .legend-card .cap{margin-top:3px;color:var(--muted);font-size:.82rem;line-height:1.45}
 
-    .day{margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));box-shadow:var(--shadow)}
+    .day{margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));box-shadow:var(--shadow);scroll-margin-top:18px}
     .day-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;padding:18px 18px 16px;background:linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));border-bottom:1px solid var(--line);position:relative}
     .day-head:before{content:"";position:absolute;inset:0 auto 0 0;width:8px;background:linear-gradient(180deg,var(--accent), rgba(255,255,255,.1))}
     .day.day2 .day-head:before{background:linear-gradient(180deg,#14b8a6,#22c55e)}
@@ -90,9 +91,22 @@
     .food{display:inline-flex;align-items:center;padding:3px 8px;margin-right:8px;border-radius:999px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.24);color:#fde68a;font-size:.74rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
     .mutedbox{color:#e2e8f0}
     .footer-space{height:14px}
+    .navpanel{margin:14px 0 18px;padding:16px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.05));box-shadow:var(--shadow)}
+    .navpanel-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
+    .navpanel-title{font-size:1.02rem;font-weight:900;letter-spacing:-.02em}
+    .navpanel-sub{color:var(--muted);font-size:.86rem;line-height:1.45;margin-top:4px}
+    .navgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+    .navbtn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(15,23,42,.40);color:#fff;text-decoration:none;font-weight:900;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+    .navbtn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.10)}
+    .navbtn small{color:var(--muted);font-weight:700}
+    .navbtn .arrow{color:#93c5fd}
+    .day-actions{display:flex;justify-content:flex-end;padding:0 18px 18px}
+    .backbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff;text-decoration:none;font-size:.86rem;font-weight:900}
+    .backbtn:hover{background:rgba(255,255,255,.13)}
 
     @media (max-width: 920px){
       .legend{grid-template-columns:repeat(2,1fr)}
+      .navgrid{grid-template-columns:repeat(2,1fr)}
       .thead,.row{grid-template-columns:88px 1fr .82fr 1fr 1.3fr}
       .cell{padding:12px 10px}
     }
@@ -101,6 +115,8 @@
       .hero{padding:18px 16px 16px;border-radius:22px}
       h1{font-size:1.9rem}
       .legend{grid-template-columns:1fr}
+      .navgrid{grid-template-columns:1fr}
+      .navpanel{padding:14px}
       .day-head{padding:16px 14px 14px;align-items:flex-start;flex-direction:column}
       .day-pill{white-space:normal}
       .thead{display:none}
@@ -116,6 +132,7 @@
       .cell.intro::before{content:"介紹"}
       .cell.time{font-size:1rem}
       .cell.place{font-size:1rem}
+      .day-actions{padding:0 14px 14px}
     }
   </style>
 </head>
@@ -141,7 +158,24 @@
       <div class="legend-card"><div class="num">Day 06</div><div class="cap">退房返程，前往成田機場。</div></div>
     </section>
 
-    <section class="day day1">
+    <section class="navpanel" id="day-nav">
+      <div class="navpanel-head">
+        <div>
+          <div class="navpanel-title">選擇第幾天</div>
+          <div class="navpanel-sub">點一下就能跳到對應天數區塊；每一天底部也有回到這裡的按鈕。</div>
+        </div>
+      </div>
+      <div class="navgrid" aria-label="天數選單">
+        <a class="navbtn" href="#day-1"><span>Day 01 <small>6/10</small></span><span class="arrow">→</span></a>
+        <a class="navbtn" href="#day-2"><span>Day 02 <small>6/11</small></span><span class="arrow">→</span></a>
+        <a class="navbtn" href="#day-3"><span>Day 03 <small>6/12</small></span><span class="arrow">→</span></a>
+        <a class="navbtn" href="#day-4"><span>Day 04 <small>6/13</small></span><span class="arrow">→</span></a>
+        <a class="navbtn" href="#day-5"><span>Day 05 <small>6/14</small></span><span class="arrow">→</span></a>
+        <a class="navbtn" href="#day-6"><span>Day 06 <small>6/15</small></span><span class="arrow">→</span></a>
+      </div>
+    </section>
+
+    <section class="day day1" id="day-1">
       <div class="day-head">
         <div>
           <div class="day-label">DAY 01｜6/10（三）</div>
@@ -169,9 +203,10 @@
           <div class="cell intro"><span class="stay">住宿說明</span>之後多天都會回到這裡，這是整趟旅程的中樞。</div>
         </div>
       </div>
+      <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
 
-    <section class="day day2">
+    <section class="day day2" id="day-2">
       <div class="day-head">
         <div>
           <div class="day-label">DAY 02｜6/11（四）</div>
@@ -234,9 +269,10 @@
           <div class="cell intro"><span class="stay">住宿說明</span>晚上回旅館吃火鍋，行程收得很舒服。</div>
         </div>
       </div>
+      <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
 
-    <section class="day day3">
+    <section class="day day3" id="day-3">
       <div class="day-head">
         <div>
           <div class="day-label">DAY 03｜6/12（五）</div>
@@ -292,9 +328,10 @@
           <div class="cell intro"><span class="stay">住宿說明</span>今天回程較晚，回到旅館後建議直接休息。</div>
         </div>
       </div>
+      <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
 
-    <section class="day day4">
+    <section class="day day4" id="day-4">
       <div class="day-head">
         <div>
           <div class="day-label">DAY 04｜6/13（六）</div>
@@ -350,9 +387,10 @@
           <div class="cell intro"><span class="stay">住宿說明</span>晚間回住宿，今天是城市行程滿滿的一天。</div>
         </div>
       </div>
+      <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
 
-    <section class="day day5">
+    <section class="day day5" id="day-5">
       <div class="day-head">
         <div>
           <div class="day-label">DAY 05｜6/14（日）</div>
@@ -373,9 +411,10 @@
           <div class="cell intro"><span class="tag">景點介紹</span>東京車站不只是交通樞紐，也是很適合慢慢逛的城市地標。紅磚車站建築很有歷史感，周邊地下街、商場與伴手禮店也相當完整。</div>
         </div>
       </div>
+      <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
 
-    <section class="day day6">
+    <section class="day day6" id="day-6">
       <div class="day-head">
         <div>
           <div class="day-label">DAY 06｜6/15（一）</div>
