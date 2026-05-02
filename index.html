@@ -83,6 +83,26 @@
         .rail .day-section { scroll-snap-align: start; min-width: 300px; }
 
         @media (min-width: 980px) { .rail { grid-auto-columns: minmax(320px, 420px); } }
+
+        /* left/right nav buttons for rail */
+        .rail-nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 60;
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            display:flex;align-items:center;justify-content:center;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 6px 18px rgba(15,23,42,.12);
+            border: 1px solid rgba(15,23,42,.06);
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+        }
+        .rail-nav-btn[disabled] { opacity: .38; cursor: default; }
+        .rail-nav-btn.left { left: 12px; }
+        .rail-nav-btn.right { right: 12px; }
     </style>
 </head>
 <body class="antialiased relative">
@@ -482,6 +502,11 @@
                 </div>
             </section>
         </div>
+
+        <!-- prev/next buttons (added minimal, non-invasive) -->
+        <button id="railPrev" class="rail-nav-btn left" aria-label="上一張"><i class="fa-solid fa-chevron-left"></i></button>
+        <button id="railNext" class="rail-nav-btn right" aria-label="下一張"><i class="fa-solid fa-chevron-right"></i></button>
+
     </main>
 
     <footer class="bg-gray-900 text-gray-400 py-10 mt-12 text-center">
@@ -496,6 +521,50 @@
     <a href="#" class="fixed bottom-6 right-6 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-colors z-50">
         <i class="fa-solid fa-arrow-up"></i>
     </a>
+
+<script>
+(function(){
+  const rail = document.getElementById('rail');
+  const prevBtn = document.getElementById('railPrev');
+  const nextBtn = document.getElementById('railNext');
+  if(!rail || !prevBtn || !nextBtn) return;
+  let gap = 16;
+
+  function calcCardWidth(){
+    const card = rail.querySelector('.day-section');
+    if(!card) return 320;
+    const style = getComputedStyle(rail);
+    gap = parseInt(style.gap || style.getPropertyValue('gap') || 16,10);
+    return Math.round(card.getBoundingClientRect().width + gap);
+  }
+
+  function updateButtons(){
+    const maxScroll = rail.scrollWidth - rail.clientWidth - 1;
+    prevBtn.disabled = rail.scrollLeft <= 1;
+    nextBtn.disabled = rail.scrollLeft >= maxScroll;
+  }
+
+  function scrollByDir(dir){
+    const w = calcCardWidth();
+    rail.scrollBy({ left: dir * w, behavior: 'smooth' });
+  }
+
+  prevBtn.addEventListener('click', () => scrollByDir(-1));
+  nextBtn.addEventListener('click', () => scrollByDir(1));
+
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowLeft') { e.preventDefault(); scrollByDir(-1); }
+    if(e.key === 'ArrowRight') { e.preventDefault(); scrollByDir(1); }
+  });
+
+  rail.addEventListener('scroll', () => { requestAnimationFrame(updateButtons); });
+  window.addEventListener('resize', () => { calcCardWidth(); updateButtons(); });
+
+  // initial
+  calcCardWidth();
+  updateButtons();
+})();
+</script>
 
 </body>
 </html>
