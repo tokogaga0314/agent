@@ -66,6 +66,23 @@
         section[id] {
             scroll-margin-top: 100px;
         }
+
+        /* horizontal rail for day cards */
+        .rail {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(300px, 82vw);
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 8px 4px 12px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .rail::-webkit-scrollbar{height:10px}
+        .rail::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
+        .rail .day-section { scroll-snap-align: start; min-width: 300px; }
+
+        @media (min-width: 980px) { .rail { grid-auto-columns: minmax(320px, 420px); } }
     </style>
 </head>
 <body class="antialiased relative">
@@ -168,7 +185,7 @@
             </div>
         </section>
 
-        <div class="space-y-12">
+        <div class="rail" id="rail">
             <!-- Day 1 -->
             <section id="day1" class="day-section theme-day1 shadow-sm p-0 overflow-hidden relative">
                  <!-- 包車標籤 -->
