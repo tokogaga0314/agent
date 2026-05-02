@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>東京．富士山｜六日家族旅行行程表</title>
+    <meta name="theme-color" content="#0f172a">
+    <link rel="manifest" href="/tokyo-itinerary-visuals/manifest.json">
+    <!-- PWA friendly: add apple touch -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -103,9 +108,49 @@
         .rail-nav-btn[disabled] { opacity: .38; cursor: default; }
         .rail-nav-btn.left { left: 12px; }
         .rail-nav-btn.right { right: 12px; }
+
+        /* app-shell: full-bleed mobile app feel */
+        .app-shell{min-height:100vh;display:flex;flex-direction:column;background:linear-gradient(180deg,#fff,#f8fafc)}
+        main.app-content{flex:1;padding-bottom:84px;/* reserve for bottom nav */}
+        .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:64px;background:#ffffff;border-top:1px solid rgba(15,23,42,.06);display:flex;align-items:center;justify-content:space-around;z-index:70;padding:6px 12px;box-shadow:0 -6px 20px rgba(15,23,42,.06)}
+        .bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#475569;font-size:12px;text-decoration:none}
+        .bottom-nav a.active{color:#0f172a;font-weight:700}
+        .safe-area{padding-bottom:env(safe-area-inset-bottom)}
+
+        /* ===== App-like extra styles ===== */
+        /* status bar */
+        .status-bar{height:22px;padding:4px 12px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.75));color:#0f172a;font-size:13px;position:fixed;top:0;left:0;right:0;z-index:80;backdrop-filter:blur(6px);}
+        .status-bar .sb-right{display:flex;gap:8px;align-items:center;color:#0f172a;opacity:.9}
+        /* push the fixed top nav down under status bar */
+        nav.fixed.top-0{top:22px}
+        /* make header spacing account for status bar on small screens */
+        @media (max-width: 640px){
+            header{padding-top:calc(24px + 22px)}
+            .rail-nav-btn{display:none}
+            .bottom-nav a span{display:none}
+            .bottom-nav a i{font-size:20px}
+        }
+
+        /* swipe hint */
+        .swipe-hint{position:fixed;left:50%;transform:translateX(-50%);bottom:86px;background:rgba(0,0,0,.66);color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;opacity:.95;z-index:75}
+        .swipe-hint.hide{opacity:0;transform:translateX(-50%) translateY(8px);transition:all .4s}
+
+        /* App-card feel on large screens */
+        @media (min-width:1000px){
+            body{background:#e6eefc}
+            .app-card{width:420px;margin:40px auto;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(10,20,40,.18);background:white;border:1px solid rgba(0,0,0,0.03)}
+            nav.fixed.top-0{position:sticky;top:0}
+            .bottom-nav{position:sticky}
+        }
     </style>
 </head>
 <body class="antialiased relative">
+
+    <!-- status bar (app-like) -->
+    <div class="status-bar" aria-hidden="true">
+        <div class="sb-left">9:41</div>
+        <div class="sb-right"><i class="fa-solid fa-signal"></i><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-three-quarters"></i></div>
+    </div>
 
     <!-- 導航列 (Sticky) -->
     <nav class="fixed top-0 w-full glass-card z-50 border-b border-gray-100">
@@ -162,10 +207,10 @@
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
-        <!-- 快速導覽 (手機版尤為重要) -->
-        <section id="overview" class="mb-16">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 app-content safe-area">
+        <!-- overview -->
+        <section id="overview" class="mb-8">
+
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <a href="#day1" class="block p-4 rounded-xl bg-white border border-blue-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
                     <div class="absolute -right-2 -top-2 bg-blue-100 text-blue-600 text-[10px] font-bold px-3 py-1 rounded-bl-lg">包車接機</div>
@@ -509,6 +554,19 @@
 
     </main>
 
+    <!-- swipe hint (app-like) -->
+    <div class="swipe-hint" id="swipeHint">左右滑動查看每一天</div>
+
+    <!-- bottom app nav (app-like) -->
+    <nav class="bottom-nav" role="navigation" aria-label="底部選單">
+        <a href="#day1" data-target="day1" class="active"><i class="fa-solid fa-plane-arrival"></i><span>Day1</span></a>
+        <a href="#day2" data-target="day2"><i class="fa-solid fa-utensils"></i><span>Day2</span></a>
+        <a href="#day3" data-target="day3"><i class="fa-solid fa-mountain"></i><span>Day3</span></a>
+        <a href="#day4" data-target="day4"><i class="fa-solid fa-fish"></i><span>Day4</span></a>
+        <a href="#day5" data-target="day5"><i class="fa-solid fa-compass"></i><span>Day5</span></a>
+        <a href="#day6" data-target="day6"><i class="fa-solid fa-plane-departure"></i><span>Day6</span></a>
+    </nav>
+
     <footer class="bg-gray-900 text-gray-400 py-10 mt-12 text-center">
         <div class="max-w-4xl mx-auto px-4">
             <p class="mb-4"><i class="fa-solid fa-mountain-sun text-gray-500 text-2xl"></i></p>
@@ -564,6 +622,31 @@
   calcCardWidth();
   updateButtons();
 })();
+
+// bottom nav behavior
+(function(){
+  const nav = document.querySelector('.bottom-nav');
+  if(!nav) return;
+  nav.addEventListener('click', (e)=>{
+    const a = e.target.closest('a[data-target]');
+    if(!a) return;
+    e.preventDefault();
+    const id = a.getAttribute('data-target');
+    const el = document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    // active
+    nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+    a.classList.add('active');
+  });
+})();
+
+// swipe hint behavior (show first, then hide)
+(function(){
+  const hint = document.getElementById('swipeHint');
+  if(!hint) return;
+  setTimeout(()=>{ hint.classList.add('hide'); }, 2500);
+})();
+
 </script>
 
 </body>
