@@ -59,7 +59,7 @@
         .main-content {
             flex: 1;
             overflow-y: auto;
-            padding-bottom: var(--nav-height); /* 留出底部導航列空間 */
+            padding-bottom: calc(var(--nav-height) + 16px); /* 留出底部導航列空間 + 額外間距，避免底部按鈕遮擋 */
             scroll-behavior: smooth;
         }
 
@@ -106,6 +106,13 @@
         }
         .nav-item.active i {
             transform: translateY(-2px);
+        }
+
+        /* CTA 浮動按鈕，避免遮擋 bottom-nav */
+        .cta-floating {
+            margin-bottom: calc(var(--nav-height) + 12px);
+            position: relative;
+            z-index: 45; /* 介於 app-bar(40) 與 bottom-nav(50) 之間，但高於內容 */
         }
 
         /* 日期選擇器 (水平滑動) */
