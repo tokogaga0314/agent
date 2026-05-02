@@ -299,6 +299,30 @@
   });
 })();
 </script>
+
+<script>
+// Provide core app functions in case they are missing
+if(typeof window.switchTab !== 'function'){
+  window.switchTab = function(tabName){
+    document.querySelectorAll('.view-section').forEach(el=>{ el.style.display='none'; el.classList.remove('active'); });
+    const view = document.getElementById('view-' + tabName);
+    if(view){ view.style.display = 'block'; view.classList.add('active'); }
+    // update bottom nav
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    const tab = document.getElementById('tab-' + tabName);
+    if(tab) tab.classList.add('active');
+    const ms = document.getElementById('mainScroll'); if(ms) ms.scrollTo({top:0, behavior:'smooth'});
+  };
+}
+if(typeof window.showDay !== 'function'){
+  window.showDay = function(n){
+    document.querySelectorAll('.date-btn').forEach((b,i)=> b.classList.toggle('active', i === (n-1)));
+    document.querySelectorAll('.day-content').forEach((c,i)=> c.classList.toggle('active', i === (n-1)));
+    const ms = document.getElementById('mainScroll'); if(ms) ms.scrollTo({top:0, behavior:'smooth'});
+  };
+}
+</script>
+
 </body>
 
     <!-- 頂部 App Bar -->
