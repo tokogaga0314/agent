@@ -1,484 +1,301 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>東京．富士山｜六日家族旅行行程表</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap');
-        
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-            scroll-behavior: smooth;
-        }
-
-        h1, h2, h3, .serif-text {
-            font-family: 'Noto Serif TC', serif;
-        }
-
-        .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        /* 自定義天數顏色主題 */
-        .theme-day1 { --c-main: #3b82f6; --c-light: #eff6ff; --c-border: #bfdbfe; } /* 藍色 */
-        .theme-day2 { --c-main: #10b981; --c-light: #ecfdf5; --c-border: #a7f3d0; } /* 綠色 */
-        .theme-day3 { --c-main: #f97316; --c-light: #fff7ed; --c-border: #fed7aa; } /* 橘色 */
-        .theme-day4 { --c-main: #ec4899; --c-light: #fdf2f8; --c-border: #fbcfe8; } /* 粉紅 */
-        .theme-day5 { --c-main: #8b5cf6; --c-light: #f5f3ff; --c-border: #ddd6fe; } /* 紫色 */
-        .theme-day6 { --c-main: #64748b; --c-light: #f8fafc; --c-border: #cbd5e1; } /* 灰色 */
-
-        .day-section {
-            border-left: 4px solid var(--c-main);
-            background-color: white;
-            border-radius: 0 1rem 1rem 0;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .day-section:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-
-        .day-badge {
-            background-color: var(--c-main);
-            color: white;
-        }
-        
-        .time-badge {
-            background-color: var(--c-light);
-            color: var(--c-main);
-            border: 1px solid var(--c-border);
-        }
-
-        /* 導航平滑滾動偏移 */
-        section[id] {
-            scroll-margin-top: 100px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>東京行程 Prototype｜橫向滑動版</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --surface:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#dbe4f0;
+      --shadow:0 16px 36px rgba(15,23,42,.08);
+      --r:22px;
+      --day1:#1d4ed8;
+      --day2:#059669;
+      --day3:#ea580c;
+      --day4:#db2777;
+      --day5:#7c3aed;
+      --day6:#334155;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%);color:var(--text);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+    body{min-height:100vh}
+    .wrap{max-width:980px;margin:0 auto;padding:14px 12px 24px}
+    .hero{padding:18px 16px 16px;border:1px solid rgba(148,163,184,.22);border-radius:28px;background:linear-gradient(135deg,#fff 0%,#f8fbff 55%,#fff7fb 100%);box-shadow:var(--shadow)}
+    .kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;background:#eff6ff;border:1px solid rgba(37,99,235,.15);color:#1e3a8a;font-size:.82rem;font-weight:900;letter-spacing:.02em}
+    h1{margin:14px 0 8px;font-family:"Noto Serif TC",Georgia,serif;font-size:clamp(1.9rem,4vw,3rem);line-height:1.05;letter-spacing:-.04em}
+    .sub{margin:0;color:var(--muted);font-size:.98rem;line-height:1.6}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .chip{display:inline-flex;align-items:center;gap:7px;padding:9px 11px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.84rem;font-weight:800;box-shadow:0 8px 18px rgba(15,23,42,.04)}
+    .chip i{width:8px;height:8px;border-radius:999px;background:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+    .chip.alt i{background:#0f766e;box-shadow:0 0 0 4px rgba(15,118,110,.12)}
+    .chip.warn i{background:#c2410c;box-shadow:0 0 0 4px rgba(194,65,12,.12)}
+    .board{margin-top:16px}
+    .board-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:6px 2px 10px}
+    .board-head h2{margin:0;font-size:1.05rem;letter-spacing:-.02em}
+    .board-head .hint{color:var(--muted);font-size:.84rem}
+    .rail{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:minmax(280px,82vw);
+      gap:12px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      padding:2px 2px 10px;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:thin;
+    }
+    .rail::-webkit-scrollbar{height:10px}
+    .rail::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:999px}
+    .day{
+      scroll-snap-align:start;
+      background:var(--surface);
+      border:2px solid var(--line);
+      border-radius:var(--r);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+      min-height:100%;
+    }
+    .day::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:linear-gradient(180deg,var(--accent),var(--accent2))}
+    .day-head{padding:16px 16px 14px 22px;background:linear-gradient(180deg,var(--surface2),#fff);border-bottom:1px solid var(--line)}
+    .day-label{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.8rem;font-weight:900;letter-spacing:.12em;color:var(--label);text-transform:uppercase}
+    .day-label .date{padding:3px 9px;border-radius:999px;background:var(--accent);color:#fff;letter-spacing:0;font-size:.98rem;text-transform:none}
+    .day-title{margin:8px 0 0;font-size:1.18rem;line-height:1.28;font-weight:900;font-family:"Noto Serif TC",Georgia,serif}
+    .day-desc{margin:6px 0 0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:.78rem;font-weight:900;color:var(--label)}
+    .pill.charter{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.18);color:#6d28d9}
+    .pill i{width:7px;height:7px;border-radius:999px;background:currentColor;opacity:.9}
+    .timeline{padding:12px}
+    .stop{display:grid;grid-template-columns:84px 1fr;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:#fff;margin:0 0 10px}
+    .time{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:0 .65rem;border-radius:999px;background:var(--fill);color:var(--label);font-size:.76rem;font-weight:900;width:fit-content}
+    .name{font-size:1.01rem;font-weight:900;line-height:1.3}
+    .note{margin-top:4px;color:var(--muted);font-size:.84rem;line-height:1.45}
+    .intro{margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--surface2);color:#334155;font-size:.86rem;line-height:1.55}
+    .intro b{display:inline-block;margin-right:6px}
+    .day1{--accent:var(--day1);--accent2:#93c5fd;--surface2:#eff6ff;--fill:#dbeafe;--label:#1d4ed8;--line:rgba(29,78,216,.24)}
+    .day2{--accent:var(--day2);--accent2:#6ee7b7;--surface2:#ecfdf5;--fill:#d1fae5;--label:#047857;--line:rgba(5,150,105,.24)}
+    .day3{--accent:var(--day3);--accent2:#fdba74;--surface2:#fff7ed;--fill:#ffedd5;--label:#c2410c;--line:rgba(234,88,12,.24)}
+    .day4{--accent:var(--day4);--accent2:#f9a8d4;--surface2:#fff1f7;--fill:#fce7f3;--label:#be185d;--line:rgba(219,39,119,.24)}
+    .day5{--accent:var(--day5);--accent2:#c4b5fd;--surface2:#f5f3ff;--fill:#ede9fe;--label:#6d28d9;--line:rgba(124,58,237,.24)}
+    .day6{--accent:var(--day6);--accent2:#94a3b8;--surface2:#f8fafc;--fill:#e2e8f0;--label:#334155;--line:rgba(51,65,85,.22)}
+    .day1 .name,.day2 .name,.day3 .name,.day4 .name,.day5 .name,.day6 .name{color:var(--text)}
+    .footer{margin-top:14px;color:var(--muted);font-size:.8rem;line-height:1.5;text-align:center}
+    @media (min-width:820px){
+      .rail{grid-auto-columns:minmax(320px,1fr)}
+    }
+  </style>
 </head>
-<body class="antialiased relative">
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="kicker">Mobile prototype｜橫向滑動查看行程</div>
+      <h1>東京六日行程總覽</h1>
+      <p class="sub">先看整體骨架，再左右滑動看每天細節。適合手機直接丟群組分享，快速知道每天去哪裡、哪幾天有包車。</p>
+      <div class="chips">
+        <span class="chip"><i></i>總天數 6 天</span>
+        <span class="chip alt"><i></i>日期 6/10（三）–6/15（一）</span>
+        <span class="chip warn"><i></i>包車日：6/11（四）–6/13（六）</span>
+      </div>
+    </section>
 
-    <!-- 導航列 (Sticky) -->
-    <nav class="fixed top-0 w-full glass-card z-50 border-b border-gray-100">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="font-bold text-xl tracking-tight text-blue-900 serif-text">
-                        <i class="fa-solid fa-mountain-sun text-blue-600 mr-2"></i>東京·富士山家族旅行
-                    </span>
-                </div>
-                <div class="hidden md:flex space-x-1 overflow-x-auto py-2">
-                    <a href="#day1" class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-colors">Day 1</a>
-                    <a href="#day2" class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 transition-colors">Day 2</a>
-                    <a href="#day3" class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors">Day 3</a>
-                    <a href="#day4" class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-pink-600 hover:bg-pink-50 transition-colors">Day 4</a>
-                    <a href="#day5" class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-purple-600 hover:bg-purple-50 transition-colors">Day 5</a>
-                    <a href="#day6" class="px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-slate-600 hover:bg-slate-50 transition-colors">Day 6</a>
-                </div>
-                <!-- 手機版選單按鈕 (簡化設計，直接點擊頁面內導航) -->
-                <div class="md:hidden flex items-center">
-                    <a href="#overview" class="text-gray-600 hover:text-blue-600">
-                        <i class="fa-solid fa-bars text-xl"></i>
-                    </a>
-                </div>
+    <section class="board" aria-label="行程總覽">
+      <div class="board-head">
+        <h2>左右滑動看各天</h2>
+        <div class="hint">往左 / 右滑即可切換 Day 01～Day 06</div>
+      </div>
+
+      <div class="rail">
+        <article class="day day1" id="d1">
+          <div class="day-head">
+            <div class="day-label">DAY 01 <span class="date">6/10（三）</span></div>
+            <div class="day-title">接機抵達，先把住宿安頓好</div>
+            <div class="day-desc">從成田機場進到東京中井站，這天重點是順利抵達與休息。</div>
+            <div class="meta-row">
+              <span class="pill"><i></i>單趟接機</span>
+              <span class="pill"><i></i>JX802 10:40–15:05</span>
             </div>
-        </div>
-    </nav>
-
-    <!-- Header 英雄區塊 -->
-    <header class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 hero-pattern bg-white">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-800 text-sm font-bold mb-6">
-                <i class="fa-solid fa-people-group"></i> 6天5夜家族專屬行程表
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">10:40–15:05</div>
+              <div>
+                <div class="name">成田機場</div>
+                <div class="note">抵達機場，完成入境與接駁。</div>
+                <div class="intro"><b>介紹</b>成田機場是東京主要國際門戶之一，旅程正式開始的第一站。</div>
+              </div>
             </div>
-            <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
-                東京六日家族旅行 <br class="hidden sm:block"/> <span class="text-blue-600">舒舒服服漫遊東京與富士山</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-                這次特別安排了舒適的行程，全程入住同一間民宿（不用搬行李！），從第二天到第四天連續三天都有專車接送，大家只要輕裝出門，好好享受風景跟美食就好囉！
-            </p>
-
-            <!-- 標籤區 -->
-            <div class="flex flex-wrap justify-center gap-3">
-                <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-bold text-gray-700 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span> 6/10 – 6/15
-                </span>
-                <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-bold text-gray-700 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span> 東京市區 × 富士山
-                </span>
-                <span class="inline-flex items-center px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm font-bold text-gray-700 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-purple-500 mr-2"></span> Day 2-4 連續三天包車
-                </span>
+            <div class="stop">
+              <div class="time">抵達後</div>
+              <div>
+                <div class="name">東京中井站旅館</div>
+                <div class="note">住宿基地｜入住後休息。</div>
+              </div>
             </div>
-        </div>
-    </header>
+          </div>
+        </article>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
-        <!-- 快速導覽 (手機版尤為重要) -->
-        <section id="overview" class="mb-16">
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <a href="#day1" class="block p-4 rounded-xl bg-white border border-blue-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                    <div class="absolute -right-2 -top-2 bg-blue-100 text-blue-600 text-[10px] font-bold px-3 py-1 rounded-bl-lg">包車接機</div>
-                    <div class="text-xs font-bold text-blue-500 mb-1">6/10 (三)</div>
-                    <div class="font-bold text-gray-800 group-hover:text-blue-600">Day 1 啟程</div>
-                    <div class="text-sm text-gray-500 mt-1">成田抵達與安頓</div>
-                </a>
-                <a href="#day2" class="block p-4 rounded-xl bg-white border border-green-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                    <div class="absolute -right-2 -top-2 bg-green-100 text-green-600 text-[10px] font-bold px-3 py-1 rounded-bl-lg">包車市區</div>
-                    <div class="text-xs font-bold text-green-500 mb-1">6/11 (四)</div>
-                    <div class="font-bold text-gray-800 group-hover:text-green-600">Day 2 經典</div>
-                    <div class="text-sm text-gray-500 mt-1">雙塔與築地市場</div>
-                </a>
-                <a href="#day3" class="block p-4 rounded-xl bg-white border border-orange-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                    <div class="absolute -right-2 -top-2 bg-orange-100 text-orange-600 text-[10px] font-bold px-3 py-1 rounded-bl-lg">包車長途</div>
-                    <div class="text-xs font-bold text-orange-500 mb-1">6/12 (五)</div>
-                    <div class="font-bold text-gray-800 group-hover:text-orange-600">Day 3 絕景</div>
-                    <div class="text-sm text-gray-500 mt-1">富士山周邊美景</div>
-                </a>
-                <a href="#day4" class="block p-4 rounded-xl bg-white border border-pink-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                    <div class="absolute -right-2 -top-2 bg-pink-100 text-pink-600 text-[10px] font-bold px-3 py-1 rounded-bl-lg">包車市區</div>
-                    <div class="text-xs font-bold text-pink-500 mb-1">6/13 (六)</div>
-                    <div class="font-bold text-gray-800 group-hover:text-pink-600">Day 4 潮流</div>
-                    <div class="text-sm text-gray-500 mt-1">水族館與看夜景</div>
-                </a>
-                <a href="#day5" class="block p-4 rounded-xl bg-white border border-purple-100 shadow-sm hover:shadow-md transition-all group">
-                    <div class="text-xs font-bold text-purple-500 mb-1">6/14 (日)</div>
-                    <div class="font-bold text-gray-800 group-hover:text-purple-600">Day 5 自由</div>
-                    <div class="text-sm text-gray-500 mt-1">彈性逛街休息日</div>
-                </a>
-                <a href="#day6" class="block p-4 rounded-xl bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all group relative overflow-hidden">
-                    <div class="absolute -right-2 -top-2 bg-slate-100 text-slate-600 text-[10px] font-bold px-3 py-1 rounded-bl-lg">包車送機</div>
-                    <div class="text-xs font-bold text-slate-500 mb-1">6/15 (一)</div>
-                    <div class="font-bold text-gray-800 group-hover:text-slate-600">Day 6 歸途</div>
-                    <div class="text-sm text-gray-500 mt-1">前往機場準備回家</div>
-                </a>
+        <article class="day day2" id="d2">
+          <div class="day-head">
+            <div class="day-label">DAY 02 <span class="date">6/11（四）</span></div>
+            <div class="day-title">築地、東京鐵塔、晴空塔的市區線</div>
+            <div class="day-desc">早餐市場＋城市地標的一天，晚上回民宿吃火鍋。</div>
+            <div class="meta-row">
+              <span class="pill charter"><i></i>包車日</span>
+              <span class="pill charter"><i></i>市區移動</span>
             </div>
-        </section>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">09:00</div>
+              <div>
+                <div class="name">築地市場</div>
+                <div class="note">早餐｜市場散步＋小吃</div>
+                <div class="intro"><b>介紹</b>早上來最有氛圍，適合用一頓早餐打開東京的一天。</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">12:00</div>
+              <div>
+                <div class="name">東京鐵塔 / 芝公園</div>
+                <div class="note">地標＋散步視角</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">14:00</div>
+              <div>
+                <div class="name">晴空塔</div>
+                <div class="note">14:30 鰻魚飯；逛逛時間</div>
+                <div class="intro"><b>介紹</b>晴空塔結合觀景、商場與餐飲，很適合半天慢慢逛。</div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-        <div class="space-y-12">
-            <!-- Day 1 -->
-            <section id="day1" class="day-section theme-day1 shadow-sm p-0 overflow-hidden relative">
-                 <!-- 包車標籤 -->
-                 <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10 shadow-sm">
-                    <i class="fa-solid fa-car-side mr-1"></i> 單趟包車接機
-                </div>
-                <div class="bg-[var(--c-light)] p-6 border-b border-[var(--c-border)]">
-                    <div class="flex flex-wrap gap-3 items-center mb-3">
-                        <span class="day-badge px-3 py-1 rounded-full text-sm font-bold tracking-wider">DAY 01</span>
-                        <span class="font-bold text-gray-600">6/10（三）</span>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-2">啟程：抵達東京安頓好休息</h2>
-                    <p class="text-gray-600">抵達成田機場後，會有專車直接載我們去中井站的民宿，不用拖著行李搭電車。</p>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-blue-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">10:40-15:05</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">搭乘星宇航空 (JX802) 抵達</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-plane-arrival mr-1"></i> 成田機場</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                抵達後大家一起慢慢辦理入境跟拿行李，專車司機會在機場等我們，接我們去市區。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-blue-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">下午/傍晚</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">入住民宿 (中井站)</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-bed mr-1"></i> 住宿安頓</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                專車直達民宿門口。這五個晚上我們都會住在這裡，大家可以先把行李整理好，晚上可以在附近逛逛吃點東西。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <article class="day day3" id="d3">
+          <div class="day-head">
+            <div class="day-label">DAY 03 <span class="date">6/12（五）</span></div>
+            <div class="day-title">富士山周邊長途包車日</div>
+            <div class="day-desc">這天移動密集，從山梨一路到御殿場，節奏偏滿。</div>
+            <div class="meta-row">
+              <span class="pill charter"><i></i>包車日</span>
+              <span class="pill charter"><i></i>長途移動</span>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">上午</div>
+              <div>
+                <div class="name">忍野八海</div>
+                <div class="note">山景＋泉水景觀</div>
+                <div class="intro"><b>介紹</b>以清澈湧泉和富士山背景聞名，很適合慢慢感受景色。</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">中午</div>
+              <div>
+                <div class="name">旅の駅</div>
+                <div class="note">水蜜桃、午餐</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">下午</div>
+              <div>
+                <div class="name">富士急樂園</div>
+                <div class="note">遊樂園｜行程中段</div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            <!-- Day 2 -->
-            <section id="day2" class="day-section theme-day2 shadow-sm p-0 overflow-hidden relative">
-                <!-- 包車標籤 -->
-                <div class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10 shadow-sm">
-                    <i class="fa-solid fa-car-side mr-1"></i> 整天包車 (市區)
-                </div>
-                <div class="bg-[var(--c-light)] p-6 border-b border-[var(--c-border)]">
-                    <div class="flex flex-wrap gap-3 items-center mb-3">
-                        <span class="day-badge px-3 py-1 rounded-full text-sm font-bold tracking-wider">DAY 02</span>
-                        <span class="font-bold text-gray-600">6/11（四）</span>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-2">經典：雙塔巡禮與市場海鮮</h2>
-                    <p class="text-gray-600">今天整天都有包車接送！早上先去築地吃好料，接著去看兩個東京最有名的地標，晚上回民宿吃火鍋。</p>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-green-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">09:00-11:30</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">築地市場</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-utensils mr-1"></i> 早餐與逛街</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                去東京一定要逛的市場！可以吃海鮮丼、玉子燒等在地小吃，當作豐盛的早餐。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col mdFlex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-green-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">12:00-13:30</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">東京鐵塔 & 芝公園</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-brands fa-monument mr-1"></i> 經典地標</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                司機會載我們到芝公園附近，這邊有一大片綠地，是拍橘紅色東京鐵塔最漂亮的角度喔！大家可以拍全家福。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-green-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">14:00-16:00</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">晴空塔 Skytree (吃鰻魚飯)</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-eye mr-1"></i> 觀景與逛街</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                預計 14:30 帶大家去吃有名的鰻魚飯。吃飽後可以在晴空塔底下的商場買伴手禮、逛逛街。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-green-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">17:00-18:30</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">去超市買菜回民宿煮火鍋！</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-cart-shopping mr-1"></i> LIFE 超市 (東中野店)</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                司機順路載我們去大超市，大家可以挑想吃的日本和牛、蔬菜，晚上回民宿圍爐吃火鍋，輕鬆又溫馨。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <article class="day day4" id="d4">
+          <div class="day-head">
+            <div class="day-label">DAY 04 <span class="date">6/13（六）</span></div>
+            <div class="day-title">水族館、新宿、澀谷的商圈串聯</div>
+            <div class="day-desc">上午偏輕鬆，下午進入都會逛街節奏，晚上在澀谷收尾。</div>
+            <div class="meta-row">
+              <span class="pill charter"><i></i>包車日</span>
+              <span class="pill"><i></i>室內＋商圈</span>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">10:00</div>
+              <div>
+                <div class="name">太陽城水族館</div>
+                <div class="note">室內行程｜不怕天氣</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">13:00</div>
+              <div>
+                <div class="name">新宿天婦羅餐廳</div>
+                <div class="note">午餐訂位 13:30；& 新宿晃晃</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">16:30</div>
+              <div>
+                <div class="name">澀谷 Sky</div>
+                <div class="note">晚餐美食街＋夜景</div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            <!-- Day 3 -->
-            <section id="day3" class="day-section theme-day3 shadow-sm p-0 overflow-hidden relative">
-                <!-- 包車標籤 -->
-                <div class="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10 shadow-sm">
-                    <i class="fa-solid fa-car-side mr-1"></i> 整天包車 (郊區)
-                </div>
-                <div class="bg-[var(--c-light)] p-6 border-b border-[var(--c-border)]">
-                    <div class="flex flex-wrap gap-3 items-center mb-3">
-                        <span class="day-badge px-3 py-1 rounded-full text-sm font-bold tracking-wider">DAY 03</span>
-                        <span class="font-bold text-gray-600">6/12（五）</span>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-2">絕景：出發看富士山！</h2>
-                    <p class="text-gray-600">今天會拉車到郊區，好險有專車接送，大家可以在車上補眠休息。主要行程是看富士山美景跟逛大 Outlet。</p>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-orange-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">上午</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">忍野八海</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-camera mr-1"></i> 看富士山</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                這裡有很多清澈的湧泉池子，天氣好的話，可以看到富士山倒映在水裡，風景非常漂亮，很適合慢慢散步。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-orange-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">中午</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">旅の駅 (休息站)</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-apple-whole mr-1"></i> 吃午餐、買水果</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                中途休息站，可以順便吃午餐。特別推薦這裡的山梨水蜜桃，大家可以買來嚐鮮！
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover;border-orange-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">下午</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">富士急樂園</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-ticket mr-1"></i> 行程中段</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                如果不想玩刺激設施也沒關係，園區裡面氣氛很好，也可以從不同角度看富士山。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-orange-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">晚餐</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">御殿場 Outlet</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-bag-shopping mr-1"></i> 大採購</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                日本非常有名的購物中心，地方很大品牌很多！大家可以分開逛，晚餐也在這邊的美食街解決，之後再搭包車回民宿休息。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <article class="day day5" id="d5">
+          <div class="day-head">
+            <div class="day-label">DAY 05 <span class="date">6/14（日）</span></div>
+            <div class="day-title">自由行彈性日</div>
+            <div class="day-desc">行程保留彈性，可依天氣與同行友人節奏調整。</div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">全天</div>
+              <div>
+                <div class="name">東京車站</div>
+                <div class="note">有一團會去</div>
+                <div class="intro"><b>介紹</b>紅磚車站建築很有歷史感，周邊地下街和伴手禮店也很完整。</div>
+              </div>
+            </div>
+          </div>
+        </article>
 
-            <!-- Day 4 -->
-            <section id="day4" class="day-section theme-day4 shadow-sm p-0 overflow-hidden relative">
-                 <!-- 包車標籤 -->
-                 <div class="absolute top-0 right-0 bg-pink-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10 shadow-sm">
-                    <i class="fa-solid fa-car-side mr-1"></i> 整天包車 (市區)
-                </div>
-                <div class="bg-[var(--c-light)] p-6 border-b border-[var(--c-border)]">
-                    <div class="flex flex-wrap gap-3 items-center mb-3">
-                        <span class="day-badge px-3 py-1 rounded-full text-sm font-bold tracking-wider">DAY 04</span>
-                        <span class="font-bold text-gray-600">6/13（六）</span>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-2">潮流：看魚看夜景的一天</h2>
-                    <p class="text-gray-600">這是包車的最後一天！上午會去水族館走走，下午去新宿吃天婦羅，傍晚安排去看很厲害的東京夜景。</p>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-pink-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">10:00-12:30</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">太陽城水族館</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-fish mr-1"></i> 在大樓裡的水族館</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                都在室內不用怕熱或下雨，可以看到企鵝在頭頂上游泳（背景是高樓大廈喔！），是很輕鬆的散步行程。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-pink-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">13:00-16:00</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">新宿：吃天婦羅跟逛街</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-store mr-1"></i> 午餐時間</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                13:30 預約了不錯的天婦羅當午餐。吃飽後可以在新宿附近逛逛藥妝店或百貨公司。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-pink-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">16:30-19:00</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">澀谷 Sky (Shibuya Sky) 看夕陽夜景</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-city mr-1"></i> 網美必去景點</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                搭電梯到很高的地方，外面是一大片玻璃，可以看到超級美的東京市區，傍晚去最剛好，可以順便吃晚餐。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <article class="day day6" id="d6">
+          <div class="day-head">
+            <div class="day-label">DAY 06 <span class="date">6/15（一）</span></div>
+            <div class="day-title">返程前往成田機場</div>
+            <div class="day-desc">最後一天以移動為主，回到機場後準備離開東京。</div>
+            <div class="meta-row">
+              <span class="pill"><i></i>返程航班</span>
+              <span class="pill"><i></i>JX801 14:10–16:50</span>
+            </div>
+          </div>
+          <div class="timeline">
+            <div class="stop">
+              <div class="time">09:00</div>
+              <div>
+                <div class="name">東京中井站旅館</div>
+                <div class="note">出發前往機場；單趟</div>
+              </div>
+            </div>
+            <div class="stop">
+              <div class="time">14:10</div>
+              <div>
+                <div class="name">成田機場</div>
+                <div class="note">返程航班出發</div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
 
-            <!-- Day 5 -->
-            <section id="day5" class="day-section theme-day5 shadow-sm p-0 overflow-hidden">
-                <div class="bg-[var(--c-light)] p-6 border-b border-[var(--c-border)]">
-                    <div class="flex flex-wrap gap-3 items-center mb-3">
-                        <span class="day-badge px-3 py-1 rounded-full text-sm font-bold tracking-wider">DAY 05</span>
-                        <span class="font-bold text-gray-600">6/14（日）</span>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-2">自由：大家彈性活動的日子</h2>
-                    <p class="text-gray-600">今天就沒有包車囉，大家可以睡飽一點。如果前幾天有沒買到的東西，今天可以去補齊，或是分開去想去的地方。</p>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-purple-200 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">全天</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">自由行建議：東京車站</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-compass mr-1"></i> 伴手禮集散地</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                如果不知道去哪，推薦可以搭車去東京車站！那邊的紅磚建築很漂亮可以拍照，裡面有很多好吃的甜點跟伴手禮可以買回家送人。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Day 6 -->
-            <section id="day6" class="day-section theme-day6 shadow-sm p-0 overflow-hidden relative">
-                 <!-- 包車標籤 -->
-                 <div class="absolute top-0 right-0 bg-slate-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg z-10 shadow-sm">
-                    <i class="fa-solid fa-car-side mr-1"></i> 單趟包車送機
-                </div>
-                <div class="bg-[var(--c-light)] p-6 border-b border-[var(--c-border)]">
-                    <div class="flex flex-wrap gap-3 items-center mb-3">
-                        <span class="day-badge px-3 py-1 rounded-full text-sm font-bold tracking-wider">DAY 06</span>
-                        <span class="font-bold text-gray-600">6/15（一）</span>
-                    </div>
-                    <h2 class="text-2xl font-black text-gray-900 mb-2">歸途：準備回家囉！</h2>
-                    <p class="text-gray-600">最後一天睡醒就準備要去機場啦，東西記得收好，一樣有專車來載我們去搭飛機。</p>
-                </div>
-                <div class="p-6 space-y-6">
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-slate-300 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">09:00</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">從民宿出發去機場</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-suitcase mr-1"></i> 檢查東西有沒有帶齊</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                退房前大家互相提醒一下護照跟手機有沒有拿！我們把滿滿的戰利品搬上預約好的專車，舒舒服服地前往成田機場。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col md:flex-row gap-4 border border-gray-100 p-4 rounded-xl hover:border-slate-300 transition-colors">
-                        <div class="md:w-32 flex-shrink-0">
-                            <span class="time-badge inline-block px-3 py-1 rounded-full text-sm font-bold w-full text-center">14:10-16:50</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900 mb-1">搭乘星宇航空 (JX801) 回台灣</h3>
-                            <div class="text-sm text-gray-500 mb-2"><i class="fa-solid fa-plane-departure mr-1"></i> 平安回家</div>
-                            <p class="text-gray-600 text-sm bg-gray-50 p-3 rounded-lg border border-gray-100">
-                                到機場後托運行李、逛逛免稅店，然後就上飛機準備回溫暖的家囉！
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="bg-gray-900 text-gray-400 py-10 mt-12 text-center">
-        <div class="max-w-4xl mx-auto px-4">
-            <p class="mb-4"><i class="fa-solid fa-mountain-sun text-gray-500 text-2xl"></i></p>
-            <p class="text-sm">東京六日家族旅行行程表</p>
-            <p class="text-xs mt-2 opacity-60">祝大家玩得開心、買得高興！</p>
-        </div>
-    </footer>
-
-    <!-- 返回頂部按鈕 -->
-    <a href="#" class="fixed bottom-6 right-6 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition-colors z-50">
-        <i class="fa-solid fa-arrow-up"></i>
-    </a>
-
+    <div class="footer">Prototype 方向：手機優先、橫向滑動、每一天用色系區分、包車日直接標註。</div>
+  </main>
 </body>
 </html>
