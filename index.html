@@ -6,445 +6,415 @@
   <title>東京六日行程表｜6/10–6/15</title>
   <style>
     :root{
-      --bg:#0b1020;
-      --bg2:#10192f;
-      --panel:rgba(255,255,255,.07);
-      --panel-strong:rgba(255,255,255,.10);
-      --line:rgba(255,255,255,.12);
-      --text:#f8fafc;
-      --muted:#cbd5e1;
-      --soft:#94a3b8;
-      --accent:#ef4444;
-      --accent2:#22c55e;
-      --accent3:#f59e0b;
-      --accent4:#38bdf8;
-      --shadow:0 24px 60px rgba(0,0,0,.35);
-      --radius:24px;
+      --bg:#f4f7fb;
+      --bg2:#ffffff;
+      --card:#ffffff;
+      --card-soft:#f8fbff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#dbe4f0;
+      --line-strong:#c8d6ea;
+      --accent:#2563eb;
+      --accent2:#0f766e;
+      --accent3:#c2410c;
+      --accent4:#7c3aed;
+      --shadow:0 16px 36px rgba(15,23,42,.08);
+      --radius:22px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    html,body{margin:0;padding:0;background:
-      radial-gradient(circle at top left, rgba(239,68,68,.18), transparent 24%),
-      radial-gradient(circle at 80% 0%, rgba(56,189,248,.16), transparent 22%),
-      radial-gradient(circle at 100% 100%, rgba(34,197,94,.10), transparent 18%),
-      linear-gradient(180deg, #060914 0%, var(--bg) 42%, #090d18 100%);
-      color:var(--text);
-      font-family:"Noto Sans TC", "Hiragino Sans", "Yu Gothic UI", system-ui, -apple-system, sans-serif;
-      -webkit-text-size-adjust:100%;
-    }
-    body:before{
-      content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;
-      background-image:
-        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.2));
-    }
-    .wrap{max-width:1100px;margin:0 auto;padding:18px 16px 28px;position:relative;z-index:1}
-    .hero{padding:22px 22px 18px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.05));box-shadow:var(--shadow);backdrop-filter: blur(14px);overflow:hidden;position:relative}
-    .hero:after{content:"";position:absolute;inset:auto -60px -60px auto;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle, rgba(239,68,68,.18), transparent 65%);filter:blur(6px)}
-    .kicker{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border-radius:999px;background:rgba(15,23,42,.5);border:1px solid var(--line);color:var(--muted);font-size:.82rem;font-weight:700;letter-spacing:.02em}
-    .kicker b{color:#fff}
-    h1{margin:14px 0 8px;font-size:clamp(2rem, 3.8vw, 3.35rem);line-height:1.02;letter-spacing:-.04em;font-family:"Noto Serif TC", "Songti TC", Georgia, serif}
-    .subtitle{margin:0;color:var(--muted);font-size:1rem;line-height:1.6;max-width:68ch}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg, #fff 0%, var(--bg) 100%);color:var(--text);font-family:"Noto Sans TC","PingFang TC","Hiragino Sans","Yu Gothic UI",system-ui,-apple-system,sans-serif;-webkit-text-size-adjust:100%}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.06;background-image:linear-gradient(rgba(37,99,235,.18) 1px, transparent 1px),linear-gradient(90deg, rgba(37,99,235,.18) 1px, transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.15))}
+    .wrap{max-width:1100px;margin:0 auto;padding:16px 14px 28px;position:relative;z-index:1}
+    .hero{padding:22px 18px 18px;border:1px solid rgba(148,163,184,.22);border-radius:28px;background:linear-gradient(135deg, #eff6ff 0%, #ffffff 55%, #ecfeff 100%);box-shadow:var(--shadow)}
+    .kicker{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border-radius:999px;background:#eff6ff;border:1px solid rgba(37,99,235,.15);color:#1e3a8a;font-size:.82rem;font-weight:900;letter-spacing:.02em}
+    .kicker b{color:var(--accent)}
+    h1{margin:14px 0 8px;font-size:clamp(2rem, 4vw, 3.35rem);line-height:1.02;letter-spacing:-.04em;font-family:"Noto Serif TC", Georgia, serif}
+    .subtitle{margin:0;color:var(--muted);font-size:1rem;line-height:1.65;max-width:72ch}
     .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:var(--text);font-size:.86rem;font-weight:700}
-    .chip .dot{width:8px;height:8px;border-radius:999px;background:var(--accent4);box-shadow:0 0 0 4px rgba(56,189,248,.12)}
-    .chip.alt .dot{background:var(--accent2);box-shadow:0 0 0 4px rgba(34,197,94,.12)}
-    .chip.warn .dot{background:var(--accent3);box-shadow:0 0 0 4px rgba(245,158,11,.12)}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--text);font-size:.86rem;font-weight:800;box-shadow:0 8px 18px rgba(15,23,42,.04)}
+    .chip .dot{width:8px;height:8px;border-radius:999px;background:var(--accent);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+    .chip.alt .dot{background:var(--accent2);box-shadow:0 0 0 4px rgba(15,118,110,.12)}
+    .chip.warn .dot{background:var(--accent3);box-shadow:0 0 0 4px rgba(194,65,12,.12)}
+    .chip.charter .dot{background:var(--accent4);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
 
     .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 18px}
-    .legend-card{padding:14px;border-radius:18px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
-    .legend-card .num{font-size:1.35rem;font-weight:900;letter-spacing:-.03em}
+    .legend-card{display:block;position:relative;overflow:hidden;padding:14px 14px 14px 18px;border-radius:18px;background:var(--day-surface,var(--card));border:2px solid var(--day-line,var(--line));box-shadow:var(--shadow);color:inherit;text-decoration:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+    .legend-card::before{content:"";position:absolute;inset:0 auto 0 0;width:9px;background:linear-gradient(180deg,var(--day-accent,var(--accent)),var(--day-accent-2,#60a5fa))}
+    .legend-card:hover{transform:translateY(-1px);border-color:var(--day-label-fg,var(--line-strong));box-shadow:0 12px 24px rgba(15,23,42,.05)}
+    .legend-card .num{font-size:1.2rem;font-weight:900;letter-spacing:-.03em}
     .legend-card .cap{margin-top:3px;color:var(--muted);font-size:.82rem;line-height:1.45}
+    .legend-card .jump{margin-top:10px;font-size:.8rem;font-weight:900;color:var(--day-label-fg,var(--accent));display:flex;justify-content:flex-end;gap:6px;align-items:center}
 
-    .day{margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));box-shadow:var(--shadow);scroll-margin-top:18px}
-    .day-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-end;padding:18px 18px 16px;background:linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));border-bottom:1px solid var(--line);position:relative}
-    .day-head:before{content:"";position:absolute;inset:0 auto 0 0;width:8px;background:linear-gradient(180deg,var(--accent), rgba(255,255,255,.1))}
-    .day.day2 .day-head:before{background:linear-gradient(180deg,#14b8a6,#22c55e)}
-    .day.day3 .day-head:before{background:linear-gradient(180deg,#f97316,#f59e0b)}
-    .day.day4 .day-head:before{background:linear-gradient(180deg,#ec4899,#a855f7)}
-    .day.day5 .day-head:before{background:linear-gradient(180deg,#38bdf8,#2563eb)}
-    .day.day6 .day-head:before{background:linear-gradient(180deg,#64748b,#0f172a)}
-    .day-label{font-size:.82rem;font-weight:900;letter-spacing:.12em;color:#bae6fd;text-transform:uppercase}
-    .day-title{margin-top:6px;font-size:1.28rem;font-weight:900;line-height:1.25;font-family:"Noto Serif TC", Georgia, serif}
-    .day-note{margin-top:6px;color:var(--muted);font-size:.9rem;line-height:1.45;max-width:60ch}
-    .day-pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:rgba(15,23,42,.52);border:1px solid var(--line);color:var(--muted);font-size:.82rem;white-space:nowrap}
-    .day-pill .bar{width:10px;height:10px;border-radius:999px;background:var(--accent)}
+    .legend-card.day1{--day-accent:#1d4ed8;--day-accent-2:#93c5fd;--day-surface:#dbeafe;--day-line:rgba(29,78,216,.34);--day-label-fg:#1d4ed8}
+    .legend-card.day2{--day-accent:#059669;--day-accent-2:#6ee7b7;--day-surface:#d1fae5;--day-line:rgba(5,150,105,.34);--day-label-fg:#047857}
+    .legend-card.day3{--day-accent:#ea580c;--day-accent-2:#fdba74;--day-surface:#ffedd5;--day-line:rgba(234,88,12,.34);--day-label-fg:#c2410c}
+    .legend-card.day4{--day-accent:#db2777;--day-accent-2:#f9a8d4;--day-surface:#fce7f3;--day-line:rgba(219,39,119,.34);--day-label-fg:#be185d}
+    .legend-card.day5{--day-accent:#7c3aed;--day-accent-2:#c4b5fd;--day-surface:#ede9fe;--day-line:rgba(124,58,237,.34);--day-label-fg:#6d28d9}
+    .legend-card.day6{--day-accent:#334155;--day-accent-2:#94a3b8;--day-surface:#e2e8f0;--day-line:rgba(51,65,85,.30);--day-label-fg:#334155}
 
-    .table{width:100%;border-collapse:separate;border-spacing:0}
-    .thead{display:grid;grid-template-columns:110px 1.1fr .72fr 1.05fr 1.55fr;background:rgba(15,23,42,.38);border-bottom:1px solid var(--line);padding:0 18px}
-    .th{padding:12px 10px;color:#e2e8f0;font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-    .rows{padding:10px 10px 12px}
-    .row{display:grid;grid-template-columns:110px 1.1fr .72fr 1.05fr 1.55fr;gap:0;align-items:start;margin:0 8px 8px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.06);overflow:hidden;transition:transform .18s ease, border-color .18s ease, background .18s ease}
-    .row:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.08)}
-    .cell{padding:14px 12px;border-right:1px solid rgba(255,255,255,.08);font-size:.92rem;line-height:1.52}
-    .row .cell:last-child{border-right:0}
-    .time{font-weight:900;color:#fff;font-size:.9rem;line-height:1.25}
-    .place{font-weight:900;color:#fff}
-    .kind{color:#93c5fd;font-weight:800}
-    .kind.muted{color:#cbd5e1}
-    .note{color:var(--muted)}
-    .intro{color:#dbeafe}
-    .intro .tag{display:inline-flex;align-items:center;padding:3px 8px;margin-right:8px;border-radius:999px;background:rgba(239,68,68,.14);border:1px solid rgba(239,68,68,.22);color:#fecaca;font-size:.74rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-    .stay{display:inline-flex;align-items:center;padding:3px 8px;margin-right:8px;border-radius:999px;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.22);color:#bbf7d0;font-size:.74rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-    .food{display:inline-flex;align-items:center;padding:3px 8px;margin-right:8px;border-radius:999px;background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.24);color:#fde68a;font-size:.74rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-    .mutedbox{color:#e2e8f0}
+    
+
+    .day{margin-top:16px;border:2px solid var(--day-line, var(--line));border-radius:var(--radius);overflow:hidden;background:var(--day-surface);box-shadow:var(--shadow);scroll-margin-top:18px;position:relative;--day-accent:var(--accent);--day-accent-2:#60a5fa;--day-surface:#eff6ff;--day-surface-2:#f8fbff;--day-line:rgba(37,99,235,.16);--day-label-bg:#dbeafe;--day-label-fg:#1d4ed8}
+    .day.day1{--day-accent:#1d4ed8;--day-accent-2:#93c5fd;--day-surface:#dbeafe;--day-surface-2:#eff6ff;--day-line:rgba(29,78,216,.34);--day-label-bg:#bfdbfe;--day-label-fg:#1d4ed8}
+    .day.day2{--day-accent:#059669;--day-accent-2:#6ee7b7;--day-surface:#d1fae5;--day-surface-2:#ecfdf5;--day-line:rgba(5,150,105,.34);--day-label-bg:#a7f3d0;--day-label-fg:#047857}
+    .day.day3{--day-accent:#ea580c;--day-accent-2:#fdba74;--day-surface:#ffedd5;--day-surface-2:#fff7ed;--day-line:rgba(234,88,12,.34);--day-label-bg:#fed7aa;--day-label-fg:#c2410c}
+    .day.day4{--day-accent:#db2777;--day-accent-2:#f9a8d4;--day-surface:#fce7f3;--day-surface-2:#fff1f7;--day-line:rgba(219,39,119,.34);--day-label-bg:#fbcfe8;--day-label-fg:#be185d}
+    .day.day5{--day-accent:#7c3aed;--day-accent-2:#c4b5fd;--day-surface:#ede9fe;--day-surface-2:#f5f3ff;--day-line:rgba(124,58,237,.34);--day-label-bg:#ddd6fe;--day-label-fg:#6d28d9}
+    .day.day6{--day-accent:#334155;--day-accent-2:#94a3b8;--day-surface:#e2e8f0;--day-surface-2:#f8fafc;--day-line:rgba(51,65,85,.30);--day-label-bg:#cbd5e1;--day-label-fg:#334155}
+    .day::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:linear-gradient(180deg,var(--day-accent), var(--day-accent-2));}
+    .dayhead{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;padding:18px 18px 16px 22px;background:linear-gradient(180deg, var(--day-surface), var(--day-surface-2));border-bottom:1px solid var(--day-line)}
+    .label{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:.82rem;font-weight:900;letter-spacing:.12em;color:var(--day-label-fg);text-transform:uppercase}
+    .label .date{padding:3px 9px;border-radius:999px;background:var(--day-accent);border:1px solid var(--day-accent);color:#fff;font-size:1rem;letter-spacing:0;text-transform:none}
+    .title{margin-top:6px;font-size:1.28rem;font-weight:900;line-height:1.3;font-family:"Noto Serif TC", Georgia, serif}
+    .desc{margin-top:6px;color:var(--muted);font-size:.92rem;line-height:1.5;max-width:60ch}
+    .dayhead-aside{display:flex;flex-direction:column;align-items:flex-end;gap:10px;flex:0 0 auto}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:var(--day-label-bg);border:1px solid var(--day-line);color:var(--day-label-fg);font-size:.82rem;font-weight:900;white-space:nowrap}
+    .charter{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:var(--day-surface);border:1px solid var(--day-line);color:var(--day-label-fg);font-size:.82rem;font-weight:900;white-space:nowrap}
+
+    .items{padding:12px 12px 14px}
+    .item{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:14px;border:1px solid var(--day-line);border-radius:18px;background:#fff;margin:0 0 10px;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}
+    .item:hover{transform:translateY(-1px);border-color:var(--day-label-fg);box-shadow:0 12px 24px rgba(15,23,42,.05)}
+    .time{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:0 .7rem;border-radius:999px;background:var(--day-label-bg);color:var(--day-label-fg);font-size:.78rem;font-weight:900;align-self:start;width:fit-content}
+    .item-body{min-width:0}
+    .name{margin-top:2px;font-size:1.02rem;font-weight:900;line-height:1.32}
+    .meta{margin-top:4px;color:var(--muted);font-size:.85rem;line-height:1.45}
+    .intro{margin-top:10px;padding:10px 12px;border:1px solid var(--day-line);border-radius:14px;background:var(--day-surface-2);color:#334155;font-size:.88rem;line-height:1.6}
+    .badge{display:inline-flex;align-items:center;padding:3px 8px;margin:0 8px 6px 0;border-radius:999px;font-size:.74rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;vertical-align:middle}
+    .badge.intro{background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.18);color:#1d4ed8}
+    .badge.stay{background:rgba(15,118,110,.12);border:1px solid rgba(15,118,110,.18);color:#0f766e}
+    .badge.food{background:rgba(194,65,12,.12);border:1px solid rgba(194,65,12,.18);color:#c2410c}
+    84|    85|    86|    .day-actions{display:flex;justify-content:flex-end;padding:0 18px 18px}
+    .backbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.86rem;font-weight:900;box-shadow:0 8px 18px rgba(15,23,42,.04)}
+    .backbtn:hover{border-color:var(--line-strong)}
     .footer-space{height:14px}
-    .navpanel{margin:14px 0 18px;padding:16px;border-radius:24px;border:1px solid var(--line);background:linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.05));box-shadow:var(--shadow)}
-    .navpanel-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
-    .navpanel-title{font-size:1.02rem;font-weight:900;letter-spacing:-.02em}
-    .navpanel-sub{color:var(--muted);font-size:.86rem;line-height:1.45;margin-top:4px}
-    .navgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-    .navbtn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(15,23,42,.40);color:#fff;text-decoration:none;font-weight:900;transition:transform .18s ease,border-color .18s ease,background .18s ease}
-    .navbtn:hover{transform:translateY(-1px);border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.10)}
-    .navbtn small{color:var(--muted);font-weight:700}
-    .navbtn .arrow{color:#93c5fd}
-    .day-actions{display:flex;justify-content:flex-end;padding:0 18px 18px}
-    .backbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);color:#fff;text-decoration:none;font-size:.86rem;font-weight:900}
-    .backbtn:hover{background:rgba(255,255,255,.13)}
 
     @media (max-width: 920px){
       .legend{grid-template-columns:repeat(2,1fr)}
       .navgrid{grid-template-columns:repeat(2,1fr)}
-      .thead,.row{grid-template-columns:88px 1fr .82fr 1fr 1.3fr}
-      .cell{padding:12px 10px}
     }
     @media (max-width: 760px){
       .wrap{padding:12px 10px 22px}
-      .hero{padding:18px 16px 16px;border-radius:22px}
+      .hero{padding:18px 14px 16px;border-radius:22px}
       h1{font-size:1.9rem}
       .legend{grid-template-columns:1fr}
       .navgrid{grid-template-columns:1fr}
       .navpanel{padding:14px}
-      .day-head{padding:16px 14px 14px;align-items:flex-start;flex-direction:column}
-      .day-pill{white-space:normal}
-      .thead{display:none}
-      .rows{padding:10px}
-      .row{grid-template-columns:1fr;gap:0;margin:0 0 10px}
-      .cell{border-right:0;border-bottom:1px solid rgba(255,255,255,.08);padding:10px 12px}
-      .cell:last-child{border-bottom:0}
-      .cell::before{display:inline-block;margin-right:8px;color:#94a3b8;font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-      .cell.time::before{content:"時間"}
-      .cell.place::before{content:"地點"}
-      .cell.kind::before{content:"類型"}
-      .cell.note::before{content:"備註"}
-      .cell.intro::before{content:"介紹"}
-      .cell.time{font-size:1rem}
-      .cell.place{font-size:1rem}
-      .day-actions{padding:0 14px 14px}
-    }
+      .dayhead{padding:16px 14px 14px 18px;align-items:flex-start;flex-direction:column}
+      .dayhead-aside{align-items:flex-start}
+      .day{border-radius:20px}
+      .item{grid-template-columns:1fr;gap:8px;padding:12px}
+      .time{font-size:.76rem}
+      .name{font-size:.98rem}
+      .intro{font-size:.85rem}
+   110|    }
   </style>
 </head>
 <body>
   <main class="wrap">
     <section class="hero">
-      <div class="kicker"><b>Frontend design</b>｜行程表視覺化</div>
+      <div class="kicker"><b>Frontend design</b>｜東京六日行程視覺化</div>
       <h1>東京六日行程表</h1>
-      <p class="subtitle">把 6/10～6/15 的東京行程整理成一眼就懂的時間軸表格，適合直接丟群組、分享給同行友人，手機也能快速掃過。</p>
       <div class="chips">
         <span class="chip"><span class="dot"></span>總天數 6 天</span>
-        <span class="chip alt"><span class="dot"></span>日期 6/10–6/15</span>
+        <span class="chip alt"><span class="dot"></span>日期 6/10（三）–6/15（一）</span>
         <span class="chip warn"><span class="dot"></span>東京市區 × 富士山周邊</span>
+        <span class="chip charter"><span class="dot"></span>6/11（四）–6/13（六） 為包車日</span>
       </div>
     </section>
 
-    <section class="legend">
-      <div class="legend-card"><div class="num">Day 01</div><div class="cap">接機入住，先把旅館安頓好。</div></div>
-      <div class="legend-card"><div class="num">Day 02</div><div class="cap">築地、東京鐵塔、晴空塔的經典市區線。</div></div>
-      <div class="legend-card"><div class="num">Day 03</div><div class="cap">富士山周邊長途日，景點最密集。</div></div>
-      <div class="legend-card"><div class="num">Day 04</div><div class="cap">水族館＋新宿＋澀谷，城市節奏最滿。</div></div>
-      <div class="legend-card"><div class="num">Day 05</div><div class="cap">自由行彈性日，可去東京車站。</div></div>
-      <div class="legend-card"><div class="num">Day 06</div><div class="cap">退房返程，前往成田機場。</div></div>
+    <section class="legend" id="day-nav" aria-label="天數總覽">
+      <a class="legend-card day1" href="#day-1"><div class="num">Day 01｜6/10（三）</div><div class="cap">接機入住，先把旅館安頓好。</div><div class="jump">看第 1 天 →</div></a>
+      <a class="legend-card day2" href="#day-2"><div class="num">Day 02｜6/11（四）</div><div class="cap">築地、東京鐵塔、晴空塔的經典市區線。</div><div class="jump">看第 2 天 →</div></a>
+      <a class="legend-card day3" href="#day-3"><div class="num">Day 03｜6/12（五）</div><div class="cap">富士山周邊長途日，包車移動最省力。</div><div class="jump">看第 3 天 →</div></a>
+      <a class="legend-card day4" href="#day-4"><div class="num">Day 04｜6/13（六）</div><div class="cap">水族館＋新宿＋澀谷，商圈節奏最滿。</div><div class="jump">看第 4 天 →</div></a>
+      <a class="legend-card day5" href="#day-5"><div class="num">Day 05｜6/14（日）</div><div class="cap">自由行彈性日，可去東京車站。</div><div class="jump">看第 5 天 →</div></a>
+      <a class="legend-card day6" href="#day-6"><div class="num">Day 06｜6/15（一）</div><div class="cap">退房返程，前往成田機場。</div><div class="jump">看第 6 天 →</div></a>
     </section>
-
-    <section class="navpanel" id="day-nav">
-      <div class="navpanel-head">
-        <div>
-          <div class="navpanel-title">選擇第幾天</div>
-          <div class="navpanel-sub">點一下就能跳到對應天數區塊；每一天底部也有回到這裡的按鈕。</div>
-        </div>
-      </div>
-      <div class="navgrid" aria-label="天數選單">
-        <a class="navbtn" href="#day-1"><span>Day 01 <small>6/10</small></span><span class="arrow">→</span></a>
-        <a class="navbtn" href="#day-2"><span>Day 02 <small>6/11</small></span><span class="arrow">→</span></a>
-        <a class="navbtn" href="#day-3"><span>Day 03 <small>6/12</small></span><span class="arrow">→</span></a>
-        <a class="navbtn" href="#day-4"><span>Day 04 <small>6/13</small></span><span class="arrow">→</span></a>
-        <a class="navbtn" href="#day-5"><span>Day 05 <small>6/14</small></span><span class="arrow">→</span></a>
-        <a class="navbtn" href="#day-6"><span>Day 06 <small>6/15</small></span><span class="arrow">→</span></a>
-      </div>
-    </section>
-
     <section class="day day1" id="day-1">
-      <div class="day-head">
-        <div>
-          <div class="day-label">DAY 01｜6/10（三）</div>
-          <div class="day-title">接機抵達，先把住宿安頓好</div>
-          <div class="day-note">從成田機場一路進到東京中井站，這天的重點就是順利抵達與休息。</div>
+      <div class="dayhead">
+        <div class="dayhead-main">
+          <div class="label">DAY 01 <span class="date">6/10（三）</span></div>
+          <div class="title">接機抵達，先把住宿安頓好</div>
+          <div class="desc">從成田機場一路進到東京中井站，這天的重點就是順利抵達與休息。</div>
         </div>
-        <div class="day-pill"><span class="bar"></span>單趟接機｜JX802 10:40-15:05</div>
-      </div>
-      <div class="thead">
-        <div class="th">時間</div><div class="th">地點</div><div class="th">類型</div><div class="th">備註</div><div class="th">景點 / 內容</div>
-      </div>
-      <div class="rows">
-        <div class="row">
-          <div class="cell time">10:40-15:05</div>
-          <div class="cell place">成田機場</div>
-          <div class="cell kind">抵達</div>
-          <div class="cell note">JX802 抵達</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>成田機場是東京主要國際門戶之一，抵達後通常會先確認入境、行李與交通動線。對旅客來說，這裡代表旅程真正開始，也最適合先把接駁、網路與現金等基本事項準備好。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">抵達後</div>
-          <div class="cell place">東京中井站旅館</div>
-          <div class="cell kind muted">住宿</div>
-          <div class="cell note">入住基地</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>之後多天都會回到這裡，這是整趟旅程的中樞。</div>
+        <div class="dayhead-aside">
+          <div class="pill">單趟接機｜JX802 10:40-15:05</div>
+          
         </div>
       </div>
+      <div class="items">
+      <article class="item">
+        <div class="time">10:40-15:05</div>
+        <div class="item-body">
+          <div class="name">成田機場</div>
+          <div class="meta">抵達｜JX802 抵達</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>成田機場是東京主要國際門戶之一，抵達後通常會先確認入境、行李與交通動線。對旅客來說，這裡代表旅程真正開始，也最適合先把接駁、網路與現金等基本事項準備好，讓後面的城市行程更順暢。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">抵達後</div>
+        <div class="item-body">
+          <div class="name">東京中井站旅館</div>
+          <div class="meta">住宿｜入住基地</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>之後多天都會回到這裡，這是整趟旅程的中樞。</div>
+          
+        </div>
+      </article></div>
       <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
-
     <section class="day day2" id="day-2">
-      <div class="day-head">
-        <div>
-          <div class="day-label">DAY 02｜6/11（四）</div>
-          <div class="day-title">築地、東京鐵塔、晴空塔，經典市區巡禮</div>
-          <div class="day-note">用早餐市場開場，中午走東京塔，下午到晴空塔，晚上再回旅館。</div>
+      <div class="dayhead">
+        <div class="dayhead-main">
+          <div class="label">DAY 02 <span class="date">6/11（四）</span></div>
+          <div class="title">築地、東京鐵塔、晴空塔，經典市區巡禮</div>
+          <div class="desc">用早餐市場開場，中午走東京塔，下午到晴空塔，晚上再回旅館。</div>
         </div>
-        <div class="day-pill"><span class="bar"></span>早餐市場＋地標巡禮</div>
-      </div>
-      <div class="thead">
-        <div class="th">時間</div><div class="th">地點</div><div class="th">類型</div><div class="th">備註</div><div class="th">景點 / 內容</div>
-      </div>
-      <div class="rows">
-        <div class="row">
-          <div class="cell time">08:30</div>
-          <div class="cell place">東京中井站旅館</div>
-          <div class="cell kind muted">出發</div>
-          <div class="cell note">集合後出門</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>今日從這裡出門，回來時會順路補給。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">09:00-11:30</div>
-          <div class="cell place">築地市場</div>
-          <div class="cell kind">早餐</div>
-          <div class="cell note">市場散步＋小吃</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>築地市場的魅力在於「吃」與「逛」並存，早上來最有氛圍。這裡很適合用一頓早餐打開東京的一天，海鮮丼、小吃與排隊名店都很集中。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">12:00-13:30</div>
-          <div class="cell place">東京鐵塔</div>
-          <div class="cell kind">地標</div>
-          <div class="cell note">與芝公園同段安排</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>東京鐵塔是東京最具代表性的城市地標之一，鮮明的橘紅色讓它在高樓林立的市區中特別醒目，很適合拍照、感受老派東京氣質。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">12:00-13:30</div>
-          <div class="cell place">芝公園</div>
-          <div class="cell kind">散步</div>
-          <div class="cell note">看鐵塔的綠地視角</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>芝公園是與東京鐵塔相互呼應的散步區域，綠意與城市景觀並存，很適合放慢腳步找角度看鐵塔。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">14:00-16:00</div>
-          <div class="cell place">晴空塔</div>
-          <div class="cell kind">觀景</div>
-          <div class="cell note">14:30 鰻魚飯；逛逛時間</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>晴空塔是東京近代天際線的重要象徵，不只可觀景，也結合商場、餐飲與伴手禮空間。這一帶很適合安排半個下午慢慢逛。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">17:00-18:00</div>
-          <div class="cell place">LIFE Higashinakano</div>
-          <div class="cell kind muted">採買</div>
-          <div class="cell note">補給食材</div>
-          <div class="cell intro"><span class="food">超市採買</span>回旅館前順路補貨，方便晚上火鍋。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">18:30</div>
-          <div class="cell place">東京中井站旅館</div>
-          <div class="cell kind muted">住宿</div>
-          <div class="cell note">晚餐火鍋</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>晚上回旅館吃火鍋，行程收得很舒服。</div>
+        <div class="dayhead-aside">
+          <div class="pill">早餐市場＋地標巡禮</div>
+          
         </div>
       </div>
+      <div class="items">
+      <article class="item">
+        <div class="time">08:30</div>
+        <div class="item-body">
+          <div class="name">東京中井站旅館</div>
+          <div class="meta">出發｜集合後出門</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>今日從這裡出門，回來時會順路補給。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">09:00-11:30</div>
+        <div class="item-body">
+          <div class="name">築地市場</div>
+          <div class="meta">早餐｜市場散步＋小吃</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>築地市場的魅力在於「吃」與「逛」並存，早上來最有氛圍。這裡很適合用一頓早餐打開東京的一天，海鮮丼、小吃與排隊名店都很集中。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">12:00-13:30</div>
+        <div class="item-body">
+          <div class="name">東京鐵塔</div>
+          <div class="meta">地標｜與芝公園同段安排</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>東京鐵塔是東京最具代表性的城市地標之一，鮮明的橘紅色讓它在高樓林立的市區中特別醒目，很適合拍照、感受老派東京氣質。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">12:00-13:30</div>
+        <div class="item-body">
+          <div class="name">芝公園</div>
+          <div class="meta">散步｜看鐵塔的綠地視角</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>芝公園是與東京鐵塔相互呼應的散步區域，綠意與城市景觀並存，很適合放慢腳步找角度看鐵塔。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">14:00-16:00</div>
+        <div class="item-body">
+          <div class="name">晴空塔</div>
+          <div class="meta">觀景｜14:30 鰻魚飯；逛逛時間</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>晴空塔是東京近代天際線的重要象徵，不只可觀景，也結合商場、餐飲與伴手禮空間。這一帶很適合安排半個下午，先吃午餐再慢慢逛。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">17:00-18:00</div>
+        <div class="item-body">
+          <div class="name">超市 LIFE Higashinakano ライフ東中野店</div>
+          <div class="meta">採買｜補給食材</div>
+          <div class="intro"><span class="badge food">餐食</span>回旅館前順路補貨，方便晚上火鍋。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">18:30</div>
+        <div class="item-body">
+          <div class="name">東京中井站旅館</div>
+          <div class="meta">住宿｜民宿（晚餐，火鍋）</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>晚上回旅館吃火鍋，行程收得很舒服。</div>
+          
+        </div>
+      </article></div>
       <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
-
     <section class="day day3" id="day-3">
-      <div class="day-head">
-        <div>
-          <div class="day-label">DAY 03｜6/12（五）</div>
-          <div class="day-title">富士山周邊長途日，景色與移動都很滿</div>
-          <div class="day-note">這一天是移動密集型，從山梨一路到御殿場，節奏比較吃體力。</div>
+      <div class="dayhead">
+        <div class="dayhead-main">
+          <div class="label">DAY 03 <span class="date">6/12（五）</span></div>
+          <div class="title">富士山周邊長途日，景色與車程都很滿</div>
+          <div class="desc">這一天屬於移動密集型，從山梨一路到御殿場，節奏比較吃體力。</div>
         </div>
-        <div class="day-pill"><span class="bar"></span>早出晚歸｜回民宿較晚</div>
-      </div>
-      <div class="thead">
-        <div class="th">時間</div><div class="th">地點</div><div class="th">類型</div><div class="th">備註</div><div class="th">景點 / 內容</div>
-      </div>
-      <div class="rows">
-        <div class="row">
-          <div class="cell time">08:00</div>
-          <div class="cell place">東京市區旅館</div>
-          <div class="cell kind muted">出發</div>
-          <div class="cell note">請提早整裝</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>今天很早出門，建議前一晚先整理好隨身行李。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">上午</div>
-          <div class="cell place">忍野八海</div>
-          <div class="cell kind">景點</div>
-          <div class="cell note">山梨代表景點之一</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>忍野八海以清澈湧泉、富士山背景與傳統鄉村景色聞名，是很能代表山梨風情的地方，適合慢慢感受水景與山景。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">中午</div>
-          <div class="cell place">旅の駅</div>
-          <div class="cell kind">休息</div>
-          <div class="cell note">水蜜桃、午餐</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>旅の駅通常結合在地物產、餐飲與休息功能，很適合長途移動途中停靠，順便吃午餐與補充體力。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">下午</div>
-          <div class="cell place">富士急樂園</div>
-          <div class="cell kind">遊樂園</div>
-          <div class="cell note">行程中段</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>富士急樂園以刺激設施與富士山景觀聞名，是喜歡遊樂園與速度感旅客的熱門點，光是園區氛圍就很有記憶點。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">晚餐</div>
-          <div class="cell place">御殿場 Outlet</div>
-          <div class="cell kind">購物</div>
-          <div class="cell note">晚餐與逛街一次完成</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>御殿場 Outlet 是日本最知名的購物型景點之一，品牌數量多、空間大，遠處還常能看到富士山景，適合把長途日收成輕鬆收尾。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">晚間</div>
-          <div class="cell place">東京市區旅館</div>
-          <div class="cell kind muted">住宿</div>
-          <div class="cell note">回程較晚</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>今天回程較晚，回到旅館後建議直接休息。</div>
+        <div class="dayhead-aside">
+          <div class="pill">早出晚歸｜回民宿較晚</div>
+          <span class="charter">包車日</span>
         </div>
       </div>
+      <div class="items">
+      <article class="item">
+        <div class="time">08:00</div>
+        <div class="item-body">
+          <div class="name">東京市區旅館</div>
+          <div class="meta">出發｜請提早整裝</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>今天很早出門，建議前一晚先整理好隨身行李。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">上午</div>
+        <div class="item-body">
+          <div class="name">忍野八海</div>
+          <div class="meta">景點｜山梨代表景點之一</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>忍野八海以清澈湧泉、富士山背景與傳統鄉村景色聞名，是很能代表山梨風情的地方，適合慢慢感受水景與山景。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">中午</div>
+        <div class="item-body">
+          <div class="name">旅の駅</div>
+          <div class="meta">休息｜水蜜桃、午餐</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>旅の駅通常結合在地物產、餐飲與休息功能，很適合長途移動途中停靠，順便吃午餐與補充體力。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">下午</div>
+        <div class="item-body">
+          <div class="name">富士急樂園</div>
+          <div class="meta">遊樂園｜行程中段</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>富士急樂園以刺激設施與富士山景觀聞名，是喜歡遊樂園與速度感旅客的熱門點。即使不玩很多設施，光是園區氛圍就很有記憶點。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">晚餐</div>
+        <div class="item-body">
+          <div class="name">御殿場 Outlet</div>
+          <div class="meta">購物｜晚餐與逛街一次完成</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>御殿場 Outlet 是日本最知名的購物型景點之一，品牌數量多、空間大，遠處還常能看到富士山景。晚餐與逛街可一次完成。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">晚間</div>
+        <div class="item-body">
+          <div class="name">東京市區旅館</div>
+          <div class="meta">住宿｜(這天回民宿會較晚）</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>今天回程較晚，回到旅館後建議直接休息。</div>
+          
+        </div>
+      </article></div>
       <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
-
     <section class="day day4" id="day-4">
-      <div class="day-head">
-        <div>
-          <div class="day-label">DAY 04｜6/13（六）</div>
-          <div class="day-title">水族館、新宿、澀谷，商圈串聯的一天</div>
-          <div class="day-note">上午偏輕鬆，下午進入都會逛街節奏，晚上在澀谷收尾。</div>
+      <div class="dayhead">
+        <div class="dayhead-main">
+          <div class="label">DAY 04 <span class="date">6/13（六）</span></div>
+          <div class="title">水族館、新宿、澀谷，商圈串聯的一天</div>
+          <div class="desc">上午偏輕鬆，下午進入都會逛街節奏，晚上在澀谷收尾。</div>
         </div>
-        <div class="day-pill"><span class="bar"></span>室內＋商圈＋夜景</div>
-      </div>
-      <div class="thead">
-        <div class="th">時間</div><div class="th">地點</div><div class="th">類型</div><div class="th">備註</div><div class="th">景點 / 內容</div>
-      </div>
-      <div class="rows">
-        <div class="row">
-          <div class="cell time">早餐</div>
-          <div class="cell place">民宿</div>
-          <div class="cell kind muted">早餐</div>
-          <div class="cell note">先吃再出門</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>早上先在民宿吃完早餐，再出門展開市區行程。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">09:30</div>
-          <div class="cell place">東京中井站旅館</div>
-          <div class="cell kind muted">出發</div>
-          <div class="cell note">進入整日商圈移動</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>今天從旅館出發後，會直接進入一整天的商圈行程。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">10:00-12:30</div>
-          <div class="cell place">太陽城水族館</div>
-          <div class="cell kind">景點</div>
-          <div class="cell note">室內行程，不受天氣影響</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>太陽城水族館位於池袋周邊，是一個節奏舒服、很適合早上安排的景點。室內展示讓人不受天氣影響，能慢慢看海洋生物、拍照與休息。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">13:00-16:00</div>
-          <div class="cell place">新宿天婦羅餐廳</div>
-          <div class="cell kind">午餐</div>
-          <div class="cell note">訂位 13:30；& 新宿晃晃</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>新宿是東京最具代表性的交通與商業核心之一，百貨、餐廳、地下街與街頭人潮都很有都市感。這段行程先吃天婦羅，再在新宿附近閒晃。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">16:30-19:00</div>
-          <div class="cell place">澀谷 Sky</div>
-          <div class="cell kind">觀景</div>
-          <div class="cell note">晚餐美食街</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>澀谷 Sky 以高空視野和夕景、夜景聞名，是許多人到東京會安排的指標景點。傍晚時段特別漂亮，也很適合當作今日高潮。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">19:30</div>
-          <div class="cell place">東京中井站旅館</div>
-          <div class="cell kind muted">住宿</div>
-          <div class="cell note">回住宿</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>晚間回住宿，今天是城市行程滿滿的一天。</div>
+        <div class="dayhead-aside">
+          <div class="pill">室內＋商圈＋夜景</div>
+          
         </div>
       </div>
+      <div class="items">
+      <article class="item">
+        <div class="time">早餐</div>
+        <div class="item-body">
+          <div class="name">民宿</div>
+          <div class="meta">早餐｜先吃再出門</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>早上先在民宿吃完早餐，再出門展開市區行程。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">09:30</div>
+        <div class="item-body">
+          <div class="name">東京中井站旅館</div>
+          <div class="meta">出發｜進入整日商圈移動</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>今天從旅館出發後，會直接進入一整天的商圈行程。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">10:00-12:30</div>
+        <div class="item-body">
+          <div class="name">太陽城水族館</div>
+          <div class="meta">景點｜室內行程，不受天氣影響</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>太陽城水族館位於池袋周邊，是一個節奏舒服、很適合早上安排的景點。室內展示讓人不受天氣影響，能慢慢看海洋生物、拍照與休息。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">13:00-16:00</div>
+        <div class="item-body">
+          <div class="name">新宿天婦羅餐廳</div>
+          <div class="meta">午餐｜訂位 13:30；& 新宿晃晃</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>新宿是東京最具代表性的交通與商業核心之一，百貨、餐廳、地下街與街頭人潮都很有都市感。這段行程先吃天婦羅，再在新宿附近閒晃。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">16:30-19:00</div>
+        <div class="item-body">
+          <div class="name">澀谷 Sky</div>
+          <div class="meta">觀景｜晚餐美食街</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>澀谷 Sky 以高空視野和夕景、夜景聞名，是許多人到東京會安排的指標景點。傍晚時段特別漂亮，也很適合當作今日高潮。</div>
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">19:30</div>
+        <div class="item-body">
+          <div class="name">東京中井站旅館</div>
+          <div class="meta">住宿｜回住宿</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>晚間回住宿，今天是城市行程滿滿的一天。</div>
+          
+        </div>
+      </article></div>
       <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
-
     <section class="day day5" id="day-5">
-      <div class="day-head">
-        <div>
-          <div class="day-label">DAY 05｜6/14（日）</div>
-          <div class="day-title">自由行，保留彈性給大家</div>
-          <div class="day-note">這天沒有固定壓力，可以視天氣與同行友人的節奏調整。</div>
+      <div class="dayhead">
+        <div class="dayhead-main">
+          <div class="label">DAY 05 <span class="date">6/14（日）</span></div>
+          <div class="title">自由行，保留彈性給大家</div>
+          <div class="desc">這天沒有固定壓力，可以視天氣與同行友人的節奏調整。</div>
         </div>
-        <div class="day-pill"><span class="bar"></span>彈性日</div>
-      </div>
-      <div class="thead">
-        <div class="th">時間</div><div class="th">地點</div><div class="th">類型</div><div class="th">備註</div><div class="th">景點 / 內容</div>
-      </div>
-      <div class="rows">
-        <div class="row">
-          <div class="cell time">全天</div>
-          <div class="cell place">東京車站</div>
-          <div class="cell kind">自由行</div>
-          <div class="cell note">有一團會去</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>東京車站不只是交通樞紐，也是很適合慢慢逛的城市地標。紅磚車站建築很有歷史感，周邊地下街、商場與伴手禮店也相當完整。</div>
+        <div class="dayhead-aside">
+          <div class="pill">彈性日</div>
+          
         </div>
       </div>
+      <div class="items">
+      <article class="item">
+        <div class="time">全天</div>
+        <div class="item-body">
+          <div class="name">東京車站</div>
+          <div class="meta">自由行｜有一團會去</div>
+          <div class="intro"><span class="badge intro">景點介紹</span>東京車站不只是交通樞紐，也是很適合慢慢逛的城市地標。紅磚車站建築很有歷史感，周邊地下街、商場與伴手禮店也相當完整。</div>
+        </div>
+      </article></div>
       <div class="day-actions"><a class="backbtn" href="#day-nav">↑ 回到天數選項</a></div>
     </section>
-
     <section class="day day6" id="day-6">
-      <div class="day-head">
-        <div>
-          <div class="day-label">DAY 06｜6/15（一）</div>
-          <div class="day-title">帶著回憶返程，前往成田機場</div>
-          <div class="day-note">最後一天以移動為主，回到機場後就準備離開東京。</div>
+      <div class="dayhead">
+        <div class="dayhead-main">
+          <div class="label">DAY 06 <span class="date">6/15（一）</span></div>
+          <div class="title">帶著回憶返程，前往成田機場</div>
+          <div class="desc">最後一天以移動為主，回到機場後就準備離開東京。</div>
         </div>
-        <div class="day-pill"><span class="bar"></span>返程航班｜JX801 14:10-16:50</div>
-      </div>
-      <div class="thead">
-        <div class="th">時間</div><div class="th">地點</div><div class="th">類型</div><div class="th">備註</div><div class="th">景點 / 內容</div>
-      </div>
-      <div class="rows">
-        <div class="row">
-          <div class="cell time">09:00</div>
-          <div class="cell place">東京中井站旅館</div>
-          <div class="cell kind muted">出發</div>
-          <div class="cell note">前往機場；單趟</div>
-          <div class="cell intro"><span class="stay">住宿說明</span>退房或離開前，記得再次確認護照、票券與隨身物品。</div>
-        </div>
-        <div class="row">
-          <div class="cell time">14:10-16:50</div>
-          <div class="cell place">成田機場</div>
-          <div class="cell kind">返程</div>
-          <div class="cell note">JX801 14:10-16:50</div>
-          <div class="cell intro"><span class="tag">景點介紹</span>成田機場是這趟旅程的終點，也是把東京回憶打包帶走的地方。完成報到與安檢後，通常就只剩候機與整理戰利品。</div>
+        <div class="dayhead-aside">
+          <div class="pill">返程航班｜JX801 14:10-16:50</div>
+          
         </div>
       </div>
-    </section>
-
-    <div class="footer-space"></div>
-  </main>
-</body>
-</html>
+      <div class="items">
+      <article class="item">
+        <div class="time">09:00</div>
+        <div class="item-body">
+          <div class="name">東京中井站旅館</div>
+          <div class="meta">出發｜前往機場；單趟</div>
+          <div class="intro"><span class="badge stay">住宿說明</span>退房或離開前，記得再次確認護照、票券與隨身物品。</div>
+          
+        </div>
+      </article>
+      <article class="item">
+        <div class="time">14:10-16:50</div>
+        <div class="item-body">
+          <div class="name">成田機場</div>
