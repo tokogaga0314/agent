@@ -18,18 +18,24 @@
             --nav-height: calc(65px + var(--safe-area-bottom));
         }
 
+        html, body {
+            height: auto;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
         body {
             font-family: 'Noto Sans TC', sans-serif;
             background-color: var(--app-bg);
             color: var(--text-main);
-            overscroll-behavior-y: none;
+            overscroll-behavior-y: auto;
             -webkit-tap-highlight-color: transparent;
             margin: 0;
             padding: 0;
-            min-height: 100dvh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
         h1, h2, h3, .serif-text {
@@ -108,6 +114,24 @@
             scroll-snap-type: x mandatory;
         }
 
+        /* Carousel for day contents (horizontal swipe) */
+        .day-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 12px 16px 20px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .day-carousel.hide-scrollbar::-webkit-scrollbar { display: none; }
+        .day-carousel.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .day-carousel > .day-content {
+            flex: 0 0 92%;
+            scroll-snap-align: start;
+            box-sizing: border-box;
+            display: block;
+        }
+
         .date-btn {
             flex: 0 0 auto;
             background: white;
@@ -136,10 +160,9 @@
         .timeline-container { padding: 16px 16px 40px; }
 
         .day-content {
-            display: none;
             animation: fadeIn 0.3s ease-in-out;
         }
-        .day-content.active { display: block; }
+        .day-content.active { /* visual active state handled via date button and focus */ }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -345,6 +368,7 @@
             <!-- 行程卡片區 -->
             <div class="timeline-container">
                 
+                <div class="day-carousel hide-scrollbar">
                 <!-- Day 1 (粉櫻) -->
                 <div id="day1-content" class="day-content active theme-day1">
                     <div class="day-header-card">
@@ -543,6 +567,7 @@
                     </div>
                 </div>
 
+                </div>
             </div>
         </div>
     </main>
@@ -580,13 +605,26 @@
                 }
             });
 
-            document.querySelectorAll('.day-content').forEach((content, index) => {
-                if(index === dayNumber - 1) {
-                    content.classList.add('active');
-                } else {
-                    content.classList.remove('active');
+            // Scroll carousel to the selected day (if carousel exists)
+            const carousel = document.querySelector('.day-carousel');
+            if (carousel) {
+                const target = carousel.children[dayNumber - 1];
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    Array.from(carousel.children).forEach((c, i) => c.classList.toggle('active', i === dayNumber - 1));
                 }
-            });
+            } else {
+                // fallback: show/hide legacy day-content
+                document.querySelectorAll('.day-content').forEach((content, index) => {
+                    if(index === dayNumber - 1) {
+                        content.classList.add('active');
+                        content.style.display = 'block';
+                    } else {
+                        content.classList.remove('active');
+                        content.style.display = 'none';
+                    }
+                });
+            }
 
             const mainScroll = document.getElementById('mainScroll');
             const datePickerContainer = document.querySelector('.date-picker-container');
