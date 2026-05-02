@@ -555,5 +555,46 @@ if(typeof window.showDay !== 'function'){
   };
 }
 </script>
+<script>
+(function(){
+  function scrollToSectionDay(n){
+    var sec = document.getElementById('day'+n);
+    if(sec){
+      sec.scrollIntoView({behavior:'smooth', block:'start'});
+      sec.classList.add('flash-temp');
+      setTimeout(function(){ sec.classList.remove('flash-temp'); }, 800);
+      return true;
+    }
+    return false;
+  }
+
+  window.showDay = function(n){
+    var dayContents = document.querySelectorAll('.day-content');
+    if(dayContents && dayContents.length){
+      document.querySelectorAll('.date-btn').forEach(function(b,i){ b.classList.toggle('active', i === (n-1)); });
+      dayContents.forEach(function(c,i){ c.classList.toggle('active', i === (n-1)); });
+      var ms = document.getElementById('mainScroll'); if(ms) ms.scrollTo({top:0, behavior:'smooth'});
+      return;
+    }
+    if(scrollToSectionDay(n)) return;
+    console.warn('showDay: no matching day for', n);
+  };
+
+  var _orig = window.switchTab;
+  window.switchTab = function(tabName){
+    try{ if(typeof _orig === 'function') _orig(tabName); }catch(e){ console.warn(e); }
+    if(tabName === 'schedule'){
+      var vs = document.getElementById('view-schedule');
+      if(vs){ vs.style.display = 'block'; return; }
+      var target = document.getElementById('overview') || document.getElementById('day1');
+      if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+  };
+
+  var s = document.createElement('style');
+  s.innerHTML = '.flash-temp{outline:3px solid rgba(59,130,246,0.25);transition:outline 0.3s;}';
+  document.head.appendChild(s);
+})();
+</script>
 </body>
 </html>
