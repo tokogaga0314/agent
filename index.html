@@ -634,6 +634,37 @@
                 mainScroll.scrollTo({top: targetPosition, behavior: 'smooth'});
             }
         }
+
+        // Sync carousel swipe with date buttons: observe which day card is centered and toggle active state
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.day-carousel');
+            const dateBtns = Array.from(document.querySelectorAll('.date-btn'));
+            const datePicker = document.querySelector('.date-picker');
+            if (!carousel || dateBtns.length === 0) return;
+
+            // IntersectionObserver to detect which child is mostly visible (threshold tuned for center)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const idx = Array.prototype.indexOf.call(carousel.children, entry.target);
+                        if (idx >= 0 && dateBtns[idx]) {
+                            dateBtns.forEach((b, i) => b.classList.toggle('active', i === idx));
+                            // make sure the active date button is visible in the date picker
+                            if (datePicker) dateBtns[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                        }
+                    }
+                });
+            }, { root: carousel, threshold: 0.55 });
+
+            Array.from(carousel.children).forEach(child => observer.observe(child));
+
+            // Optional: when user clicks a date button, ensure carousel scrolls to that child
+            dateBtns.forEach((btn, i) => btn.addEventListener('click', () => {
+                const target = carousel.children[i];
+                if (target) target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }));
+        });
+
     </script>
 </body>
 </html>
