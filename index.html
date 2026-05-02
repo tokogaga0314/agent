@@ -609,7 +609,15 @@
             if (view) view.style.display = 'block';
             if (tab) { tab.classList.add('active'); tab.setAttribute('aria-current', 'page'); }
 
+            // Reset main scroll to top of view
             document.getElementById('mainScroll').scrollTop = 0;
+
+            // When entering schedule view, lock page-level vertical scroll and make each day card vertically scrollable.
+            if (tabName === 'schedule') {
+                enableScheduleMode();
+            } else {
+                disableScheduleMode();
+            }
         }
 
         function showDay(dayNumber) {
@@ -652,6 +660,43 @@
             }
         }
 
+        // Helper: calculate and set the height for each .day-content so vertical scrolling only happens inside the day card
+        function setDayContentHeights() {
+            const header = document.querySelector('.app-header');
+            const datePicker = document.querySelector('.date-picker-container');
+            const nav = document.querySelector('.bottom-nav');
+            const headerH = header ? header.offsetHeight : 0;
+            const datePickerH = datePicker ? datePicker.offsetHeight : 0;
+            const navH = nav ? nav.offsetHeight : 0;
+            // Use innerHeight to account for mobile UI (safe-area) correctly
+            const available = Math.max(200, window.innerHeight - headerH - datePickerH - navH - 8); // min 200px
+
+            document.querySelectorAll('.day-content').forEach(c => {
+                c.style.height = available + 'px';
+                c.style.overflowY = 'auto';
+                c.style.boxSizing = 'border-box';
+                c.style.webkitOverflowScrolling = 'touch';
+            });
+        }
+
+        function enableScheduleMode() {
+            document.body.classList.add('schedule-mode');
+            const mainScroll = document.getElementById('mainScroll');
+            if (mainScroll) mainScroll.style.overflow = 'hidden';
+            setDayContentHeights();
+        }
+
+        function disableScheduleMode() {
+            document.body.classList.remove('schedule-mode');
+            const mainScroll = document.getElementById('mainScroll');
+            if (mainScroll) mainScroll.style.overflow = 'auto';
+            document.querySelectorAll('.day-content').forEach(c => {
+                c.style.height = '';
+                c.style.overflowY = '';
+                c.style.boxSizing = '';
+            });
+        }
+
         // Sync carousel swipe with date buttons: observe which day card is centered and toggle active state
         document.addEventListener('DOMContentLoaded', () => {
             const carousel = document.querySelector('.day-carousel');
@@ -680,6 +725,11 @@
                 const target = carousel.children[i];
                 if (target) target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             }));
+
+            // Recompute heights on resize while in schedule mode
+            window.addEventListener('resize', () => {
+                if (document.body.classList.contains('schedule-mode')) setDayContentHeights();
+            });
         });
 
     </script>
