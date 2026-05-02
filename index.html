@@ -247,7 +247,59 @@
 
     </style>
 </head>
-<body>
+<script>
+(function(){
+  function ensureBottomNav(){
+    if(document.querySelector('.bottom-nav')) return;
+    const nav = document.createElement('nav');
+    nav.className = 'bottom-nav';
+    nav.setAttribute('role','navigation');
+    nav.setAttribute('aria-label','底部選單');
+    nav.innerHTML = `
+      <button class="nav-item" onclick="switchTab('home')" id="tab-home">
+        <i class="fa-solid fa-house"></i>
+        <span>首頁</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('schedule')" id="tab-schedule">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span>每日行程</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('info')" id="tab-info">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>資訊</span>
+      </button>`;
+    try{ document.body.appendChild(nav); }catch(e){ document.documentElement.appendChild(nav); }
+
+    // restore active state
+    try{
+      if(typeof switchTab === 'function'){
+        const activeView = Array.from(document.querySelectorAll('.view-section')).find(v=>v.style.display==='block' || v.classList.contains('active'));
+        if(activeView && activeView.id){
+          const tabId = 'tab-' + activeView.id.replace('view-','');
+          const t = document.getElementById(tabId);
+          if(t) t.classList.add('active');
+        } else {
+          const t = document.getElementById('tab-home'); if(t) t.classList.add('active');
+        }
+      }
+    }catch(e){}
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    ensureBottomNav();
+    // try to unregister service workers and clear the app cache to ensure latest assets
+    try{
+      if('serviceWorker' in navigator){
+        navigator.serviceWorker.getRegistrations().then(regs=>{ regs.forEach(r=>r.unregister()); });
+      }
+      if('caches' in window){ caches.delete('tokyo-itinerary-v1'); }
+    }catch(e){}
+    // retry after short delay
+    setTimeout(ensureBottomNav, 800);
+  });
+})();
+</script>
+</body>
 
     <!-- 頂部 App Bar -->
     <header class="app-bar flex justify-between items-center px-4 py-3">
