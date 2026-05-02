@@ -254,25 +254,40 @@
             z-index: 50;
         }
 
-        .nav-item {
-            display: flex;
-            flex-direction: column;
+        .bottom-nav .nav-item {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 8px;
             align-items: center;
             justify-content: center;
             flex: 1;
             height: 100%;
             color: #A0A0A0;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             transition: color 0.2s;
+            padding: 8px 6px;
+            min-width: 120px;
         }
 
-        .nav-item i {
+        .bottom-nav .nav-icon {
             font-size: 1.25rem;
-            margin-bottom: 4px;
+            color: currentColor;
+            line-height: 1;
         }
 
-        .nav-item.active { color: #555555; }
+        .bottom-nav .nav-label {
+            display: inline-block;
+            font-size: 0.75rem;
+        }
+
+        .bottom-nav .nav-item.active { color: #555555; }
+
+        @media (max-width: 420px) {
+            .bottom-nav .nav-item { flex-direction: column; gap: 4px; min-width: 72px; padding: 8px 6px; }
+            .bottom-nav .nav-icon { font-size: 1.15rem; }
+            .bottom-nav .nav-label { font-size: 0.66rem; }
+        }
 
     </style>
 </head>
@@ -574,23 +589,25 @@
 
     <!-- 底部導航 (Tab Bar) -->
     <nav class="bottom-nav">
-        <button class="nav-item active" onclick="switchTab('home')" id="tab-home">
-            <i class="fa-solid fa-house"></i>
-            <span>首頁總覽</span>
+        <button class="nav-item active" onclick="switchTab('home')" id="tab-home" aria-current="page" aria-label="首頁總覽">
+            <i class="fa-solid fa-house nav-icon" aria-hidden="true"></i>
+            <span class="nav-label">首頁總覽</span>
         </button>
-        <button class="nav-item" onclick="switchTab('schedule')" id="tab-schedule">
-            <i class="fa-solid fa-calendar-days"></i>
-            <span>每日行程</span>
+        <button class="nav-item" onclick="switchTab('schedule')" id="tab-schedule" aria-label="每日行程">
+            <i class="fa-solid fa-calendar-days nav-icon" aria-hidden="true"></i>
+            <span class="nav-label">每日行程</span>
         </button>
     </nav>
 
     <script>
         function switchTab(tabName) {
             document.querySelectorAll('.view-section').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => { el.classList.remove('active'); el.removeAttribute('aria-current'); });
             
-            document.getElementById('view-' + tabName).style.display = 'block';
-            document.getElementById('tab-' + tabName).classList.add('active');
+            const view = document.getElementById('view-' + tabName);
+            const tab = document.getElementById('tab-' + tabName);
+            if (view) view.style.display = 'block';
+            if (tab) { tab.classList.add('active'); tab.setAttribute('aria-current', 'page'); }
 
             document.getElementById('mainScroll').scrollTop = 0;
         }
