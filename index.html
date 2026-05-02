@@ -686,6 +686,19 @@
             document.getElementById('mainScroll').scrollTo({top: 0, behavior: 'smooth'});
         }
     </script>
+
+    <!-- 強制取消 service worker 並清理快取，確保使用者看到最新內容 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+                for (let reg of regs) { try { reg.unregister(); } catch(e) { console.warn('SW unregister failed', e); } }
+            }).catch(e=>console.warn('getRegistrations failed', e));
+        }
+        if ('caches' in window) {
+            caches.keys().then(function(names){ for(let name of names) caches.delete(name); }).catch(e=>console.warn('cache delete failed', e));
+        }
+    </script>
+
 </body>
 </html>
 
