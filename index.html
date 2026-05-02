@@ -127,7 +127,8 @@
         .day-carousel.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .day-carousel > .day-content {
             flex: 0 0 92%;
-            scroll-snap-align: start;
+            scroll-snap-align: center; /* match JS centering */
+            scroll-snap-stop: always;
             box-sizing: border-box;
             display: block;
         }
@@ -620,6 +621,9 @@
             }
         }
 
+        // suppression flag to avoid observer race when programmatically scrolling
+        let _suppressDayObserver = false;
+
         function showDay(dayNumber) {
             document.querySelectorAll('.date-btn').forEach((btn, index) => {
                 if(index === dayNumber - 1) {
@@ -635,8 +639,13 @@
             if (carousel) {
                 const target = carousel.children[dayNumber - 1];
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    _suppressDayObserver = true; // prevent observer from overriding while animating
+                    // compute left so the target centers in carousel
+                    const left = target.offsetLeft - (carousel.clientWidth - target.clientWidth) / 2;
+                    carousel.scrollTo({ left, behavior: 'smooth' });
                     Array.from(carousel.children).forEach((c, i) => c.classList.toggle('active', i === dayNumber - 1));
+                    // re-enable observer after a short delay (covers typical smooth scroll duration)
+                    setTimeout(() => { _suppressDayObserver = false; }, 420);
                 }
             } else {
                 // fallback: show/hide legacy day-content
@@ -706,6 +715,7 @@
 
             // IntersectionObserver to detect which child is mostly visible (threshold tuned for center)
             const observer = new IntersectionObserver((entries) => {
+                if (_suppressDayObserver) return; // ignore observer while programmatic scroll is in-flight
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const idx = Array.prototype.indexOf.call(carousel.children, entry.target);
@@ -721,10 +731,7 @@
             Array.from(carousel.children).forEach(child => observer.observe(child));
 
             // Optional: when user clicks a date button, ensure carousel scrolls to that child
-            dateBtns.forEach((btn, i) => btn.addEventListener('click', () => {
-                const target = carousel.children[i];
-                if (target) target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }));
+            dateBtns.forEach((btn, i) => btn.addEventListener('click', () => showDay(i + 1)));
 
             // Recompute heights on resize while in schedule mode
             window.addEventListener('resize', () => {
