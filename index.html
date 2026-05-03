@@ -103,7 +103,7 @@
             background: rgba(252, 252, 250, 0.95);
             backdrop-filter: blur(10px);
             z-index: 30;
-            padding: 12px 0;
+            padding: 8px 0;
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
 
@@ -138,14 +138,18 @@
             flex: 0 0 auto;
             background: white;
             border: 1px solid #EBEBEB;
-            border-radius: 16px;
-            padding: 10px 16px;
+            border-radius: 14px;
+            padding: 8px 10px;
             text-align: center;
-            min-width: 65px;
+            min-width: 56px;
             scroll-snap-align: start;
             box-shadow: 0 2px 4px rgba(0,0,0,0.01);
-            transition: all 0.25s ease;
+            transition: all 0.18s ease;
             color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
         }
 
         .date-btn.active {
@@ -156,8 +160,9 @@
             transform: translateY(-2px);
         }
 
-        .date-btn .day-label { font-size: 0.75rem; font-weight: 700; margin-bottom: 2px;}
-        .date-btn .date-num { font-size: 1.1rem; font-weight: 900; }
+        .date-btn .day-label { font-size: 0.70rem; font-weight: 700; margin: 0;}
+        .date-btn .weekday { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); margin: 0; }
+        .date-btn .date-num { font-size: 0.95rem; font-weight: 900; }
 
         .timeline-container { padding: 16px 16px 16px; }
 
@@ -709,6 +714,35 @@
 
         // Sync carousel swipe with date buttons: observe which day card is centered and toggle active state
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Insert weekday labels under each date button based on the displayed month/day ---
+            try {
+                const dateBtnsInit = Array.from(document.querySelectorAll('.date-btn'));
+                const year = new Date().getFullYear();
+                const weekdayMap = ['日','一','二','三','四','五','六'];
+                dateBtnsInit.forEach(btn => {
+                    const dateNumEl = btn.querySelector('.date-num');
+                    if (!dateNumEl) return;
+                    const txt = dateNumEl.textContent.trim(); // expected like "6/10"
+                    const parts = txt.split('/').map(s => parseInt(s, 10));
+                    if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                        const [m, d] = parts;
+                        const dt = new Date(year, m - 1, d);
+                        if (!isNaN(dt.getTime())) {
+                            const wd = '星期' + weekdayMap[dt.getDay()];
+                            const wdEl = document.createElement('div');
+                            wdEl.className = 'weekday';
+                            wdEl.textContent = wd;
+                            // place between day-label and date-num
+                            const labelEl = btn.querySelector('.day-label');
+                            if (labelEl) labelEl.insertAdjacentElement('afterend', wdEl);
+                            else dateNumEl.parentElement.insertBefore(wdEl, dateNumEl);
+                        }
+                    }
+                });
+            } catch (e) {
+                console.warn('failed to compute weekday labels', e);
+            }
+
             const carousel = document.querySelector('.day-carousel');
             const dateBtns = Array.from(document.querySelectorAll('.date-btn'));
             const datePicker = document.querySelector('.date-picker');
