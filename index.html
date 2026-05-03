@@ -107,15 +107,34 @@
         /* Make top controls inside each view stick under the fixed header */
         .date-picker-container,
         .view-section > .view-top,
-        .view-section > .tab-header {
+        .date-picker-container {
             position: sticky;
             top: var(--header-height, 64px);
             background: rgba(252, 252, 250, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 40;
+            z-index: 30;
             padding: 8px 0;
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
+
+        /* When schedule mode is active, pin the date picker under the fixed header */
+        .date-picker-container.fixed {
+            position: fixed;
+            top: var(--header-height, 64px);
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 45; /* above day contents but below header */
+            box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+        }
+
+        /* When pinned, push main content down by header + date-picker height */
+        .schedule-mode .main-content {
+            padding-top: calc(var(--header-height, 64px) + var(--date-picker-height, 56px));
+        }
+
+        /* Also ensure timeline starts below the pinned date picker */
+        .schedule-mode .timeline-container { padding-top: 16px; }
 
         .date-picker {
             display: flex;
@@ -698,8 +717,9 @@
             const headerH = header ? header.offsetHeight : 0;
             const datePickerH = datePicker ? datePicker.offsetHeight : 0;
             const navH = nav ? nav.offsetHeight : 0;
-            // expose header height as a CSS variable so sticky elements can use it
+            // expose header & date-picker heights as CSS variables so sticky elements and padding can use them
             try { document.documentElement.style.setProperty('--header-height', headerH + 'px'); } catch(e){}
+            try { document.documentElement.style.setProperty('--date-picker-height', datePickerH + 'px'); } catch(e){}
             // Use innerHeight to account for mobile UI (safe-area) correctly
             const available = Math.max(200, window.innerHeight - headerH - datePickerH - navH - 8); // min 200px
 
@@ -715,18 +735,26 @@
             document.body.classList.add('schedule-mode');
             const mainScroll = document.getElementById('mainScroll');
             if (mainScroll) mainScroll.style.overflow = 'hidden';
+            // Pin the date-picker under header when schedule mode is enabled
+            const dpContainer = document.querySelector('.date-picker-container');
+            if (dpContainer) dpContainer.classList.add('fixed');
             setDayContentHeights();
         }
-
+        
         function disableScheduleMode() {
             document.body.classList.remove('schedule-mode');
             const mainScroll = document.getElementById('mainScroll');
             if (mainScroll) mainScroll.style.overflow = 'auto';
+            // Unpin date-picker and restore layout
+            const dpContainer = document.querySelector('.date-picker-container');
+            if (dpContainer) dpContainer.classList.remove('fixed');
             document.querySelectorAll('.day-content').forEach(c => {
                 c.style.height = '';
                 c.style.overflowY = '';
                 c.style.boxSizing = '';
             });
+            // clear CSS var so non-schedule views use default padding
+            try { document.documentElement.style.removeProperty('--date-picker-height'); } catch(e){}
         }
 
         // Sync carousel swipe with date buttons: observe which day card is centered and toggle active state
