@@ -734,7 +734,10 @@
 
         function enableScheduleMode() {
             document.body.classList.add('schedule-mode');
-            const mainScroll = document.getElementById('mainScroll');
+            // prefer to lock scrolling at document level as a fallback if #mainScroll isn't present or inline style isn't applied
+            try { document.documentElement.style.overflow = 'hidden'; } catch(e){}
+            try { document.body.style.overflow = 'hidden'; } catch(e){}
+            const mainScroll = document.getElementById('mainScroll') || document.querySelector('.main-content');
             if (mainScroll) mainScroll.style.overflow = 'hidden';
             // Pin the date-picker under header when schedule mode is enabled
             const dpContainer = document.querySelector('.date-picker-container');
@@ -744,7 +747,9 @@
         
         function disableScheduleMode() {
             document.body.classList.remove('schedule-mode');
-            const mainScroll = document.getElementById('mainScroll');
+            try { document.documentElement.style.overflow = ''; } catch(e){}
+            try { document.body.style.overflow = ''; } catch(e){}
+            const mainScroll = document.getElementById('mainScroll') || document.querySelector('.main-content');
             if (mainScroll) mainScroll.style.overflow = 'auto';
             // Unpin date-picker and restore layout
             const dpContainer = document.querySelector('.date-picker-container');
