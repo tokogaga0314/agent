@@ -104,12 +104,15 @@
         .theme-day6 { --c-main: #A8A9AD; --c-light: #F5F5F7; --c-border: #E5E5E8; --c-text: #78797D; }
 
         /* 行程視圖 */
-        .date-picker-container {
+        /* Make top controls inside each view stick under the fixed header */
+        .date-picker-container,
+        .view-section > .view-top,
+        .view-section > .tab-header {
             position: sticky;
             top: var(--header-height, 64px);
             background: rgba(252, 252, 250, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 30;
+            z-index: 40;
             padding: 8px 0;
             border-bottom: 1px solid rgba(0,0,0,0.03);
         }
@@ -623,15 +626,20 @@
             if (view) view.style.display = 'block';
             if (tab) { tab.classList.add('active'); tab.setAttribute('aria-current', 'page'); }
 
-            // Reset main scroll to top of view
-            document.getElementById('mainScroll').scrollTop = 0;
+            // Defer layout-sensitive operations to next frame so sticky offsets and measurements are correct
+            requestAnimationFrame(() => {
+                const mainScrollEl = document.getElementById('mainScroll');
+                if (mainScrollEl) mainScrollEl.scrollTop = 0;
 
-            // When entering schedule view, lock page-level vertical scroll and make each day card vertically scrollable.
-            if (tabName === 'schedule') {
-                enableScheduleMode();
-            } else {
-                disableScheduleMode();
-            }
+                if (tabName === 'schedule') {
+                    enableScheduleMode();
+                    // ensure heights recalc after microtask to stabilize header/datePicker heights
+                    setTimeout(setDayContentHeights, 60);
+                } else {
+                    disableScheduleMode();
+                    setTimeout(() => { setDayContentHeights(); }, 60);
+                }
+            });
         }
 
         // suppression flag to avoid observer race when programmatically scrolling
