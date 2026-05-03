@@ -152,6 +152,10 @@
             padding: 12px 16px 12px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            /* prefer horizontal panning on the carousel and contain overscroll to avoid scroll chaining */
+            touch-action: pan-x;
+            -ms-touch-action: pan-x;
+            overscroll-behavior: contain;
         }
         .day-carousel.hide-scrollbar::-webkit-scrollbar { display: none; }
         .day-carousel.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -197,6 +201,10 @@
 
         .day-content {
             animation: fadeIn 0.3s ease-in-out;
+            /* prefer vertical panning inside a day card and prevent parent carousel from stealing scroll */
+            touch-action: pan-y;
+            -ms-touch-action: pan-y;
+            overscroll-behavior: contain;
         }
         .day-content.active { /* visual active state handled via date button and focus */ }
 
