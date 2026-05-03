@@ -133,8 +133,8 @@
             padding-top: calc(var(--header-height, 64px) + var(--date-picker-height, 56px));
         }
 
-        /* Also ensure timeline starts below the pinned date picker */
-        .schedule-mode .timeline-container { padding-top: 16px; }
+        /* Also ensure timeline starts below the pinned date picker (use actual date-picker height) */
+        .schedule-mode .timeline-container { padding-top: calc(var(--date-picker-height, 56px) + 12px); }
 
         .date-picker {
             display: flex;
