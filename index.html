@@ -174,7 +174,8 @@
         .date-btn .weekday { font-size: 0.68rem; font-weight: 600; color: var(--text-muted); margin: 0; }
         .date-btn .date-num { font-size: 0.95rem; font-weight: 900; }
 
-        .timeline-container { padding: 16px 16px 16px; }
+        /* ensure timeline content starts below sticky date-picker (uses JS-updated --date-picker-height) */
+        .timeline-container { padding: calc(var(--date-picker-height, 56px) + 16px) 16px 16px; }
 
         .day-content {
             animation: fadeIn 0.3s ease-in-out;
@@ -698,8 +699,9 @@
             const headerH = header ? header.offsetHeight : 0;
             const datePickerH = datePicker ? datePicker.offsetHeight : 0;
             const navH = nav ? nav.offsetHeight : 0;
-            // expose header height as a CSS variable so sticky elements can use it
+            // expose header & date-picker heights as CSS variables so sticky elements and padding can use them
             try { document.documentElement.style.setProperty('--header-height', headerH + 'px'); } catch(e){}
+            try { document.documentElement.style.setProperty('--date-picker-height', datePickerH + 'px'); } catch(e){}
             // Use innerHeight to account for mobile UI (safe-area) correctly
             const available = Math.max(200, window.innerHeight - headerH - datePickerH - navH - 8); // min 200px
 
