@@ -46,22 +46,29 @@
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* 頂部 Header */
+        /* 頂部 Header (fixed) */
         .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
             background: rgba(252, 252, 250, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
             padding: calc(env(safe-area-inset-top, 10px) + 12px) 16px 12px;
-            z-index: 40;
+            z-index: 60;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.03);
         }
 
         /* 滾動區域 */
         .main-content {
             flex: 1;
             overflow-y: auto;
+            padding-top: var(--header-height, 64px);
             padding-bottom: calc(var(--nav-height) + 8px);
             scroll-behavior: smooth;
         }
@@ -99,7 +106,7 @@
         /* 行程視圖 */
         .date-picker-container {
             position: sticky;
-            top: 0;
+            top: var(--header-height, 64px);
             background: rgba(252, 252, 250, 0.95);
             backdrop-filter: blur(10px);
             z-index: 30;
@@ -683,6 +690,8 @@
             const headerH = header ? header.offsetHeight : 0;
             const datePickerH = datePicker ? datePicker.offsetHeight : 0;
             const navH = nav ? nav.offsetHeight : 0;
+            // expose header height as a CSS variable so sticky elements can use it
+            try { document.documentElement.style.setProperty('--header-height', headerH + 'px'); } catch(e){}
             // Use innerHeight to account for mobile UI (safe-area) correctly
             const available = Math.max(200, window.innerHeight - headerH - datePickerH - navH - 8); // min 200px
 
