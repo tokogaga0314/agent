@@ -129,8 +129,9 @@
         }
 
         /* When pinned, push main content down by header + date-picker height */
+        /* Keep main-content offset to header only; timeline-container will handle date-picker offset to avoid double-counting */
         .schedule-mode .main-content {
-            padding-top: calc(var(--header-height, 64px) + var(--date-picker-height, 56px));
+            padding-top: var(--header-height, 64px);
         }
 
         /* Also ensure timeline starts below the pinned date picker (use actual date-picker height) */
